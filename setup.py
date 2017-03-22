@@ -39,8 +39,6 @@ setup(
     keywords='photon science file input output',
     
     packages=find_packages(),
-
-    install_requires=['numpy', 'six', 'h5py','fabio'], 
     
     extras_require={
         'test': ['files']
