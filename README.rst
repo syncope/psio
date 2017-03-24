@@ -1,11 +1,7 @@
-====
-PSIO
-====
-
-Photon Science Input Output
+PSIO: Photon Science Input Output
 ---------------------------
 
-A simple wrapper library that allows unified read access to most common data formats in use at X ray synchrotron facilities.
+A simple wrapper library that allows unified read access to most common data formats in use at x-ray synchrotron facilities.
 In it's most simple form it yields an iterator to the data numpy array(s) for the given files.
 This interface is very similar to reading of standard files in Python.
 For container data (e.g. hdf5) random access ("indexing") is possible.
