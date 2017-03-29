@@ -1,16 +1,16 @@
 from setuptools import setup, find_packages
 
-from sphinx.setup_command import BuildDoc
-
 from codecs import open
 from os import path
 
 with open(path.join('.', 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+# from sphinx.setup_command import BuildDoc
+
 setup(
     name='psio',
-    version='0.1.1a.dev',
+    version='0.1.0.dev',
 
     description='Module to facilitate access for photon science data in different formats.', 
     long_description=long_description,
@@ -36,7 +36,9 @@ setup(
 
     keywords='photon science file input output',
     
-    packages=find_packages(),
+    packages=['psio',],
+    
+    package_dir = { 'psio':'psio',},
     
     extras_require={
         'test': ['files']
