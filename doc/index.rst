@@ -20,7 +20,8 @@ Contents:
 
    installation
    users_guide
-   api_documentation
+   APIDOC/psio
+   APIDOC/modules
 
 Indices and tables
 ==================

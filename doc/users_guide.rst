@@ -54,7 +54,7 @@ One can directly iterate over the images, where the individual elements are nump
         doSomething(image)
 
 In case of binary image files, usually indicated by suffices like .tif, .cbf, .edf, etc., the fabio library is used to read the data.
-The assumption is that the data is single data per file; multi-tif is not supported (for now).
+The assumption is that the data is single data per file; multi-tif is not supported.
 
 In case of reading hdf5 or NeXus data, the h5py library is used.
 This is inherently assumed to be multiple data.
@@ -75,6 +75,18 @@ Due to the different structure, for hdf5/NeXus data a path must be given:
         calculateFunction(image)
 
 In addition to this, random access of individual images/data elements in a hdf5/NeXus file is possible.
+
+.. code-block:: python
+
+    DataHandler NexusReader()
+    filenames = ['001.ndf', '002.ndf', '003.ndf']
+    
+    path = "/entry/instrument/pilatus/data"
+
+    data = NexusReader.create_reader(filenames, path)
+    
+    imageA = data[23]
+
 
 
 Using the library: Writing data

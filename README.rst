@@ -17,12 +17,12 @@ For data storage solely hdf5 is used.
 A simple graphical data viewer is also included.
 
 In order to use the full functionality, the following requirements need to be met:
-numpy
-six
-abc
-h5py
-fabio
-pyqtgraph
-re
-pni
-unittest
+ - numpy
+ - six
+ - abc
+ - h5py
+ - fabio
+ - pyqtgraph
+ - re
+ - pni
+ - unittest
