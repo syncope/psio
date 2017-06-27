@@ -22,7 +22,6 @@
 import fabioInputHandler
 import nexusInputHandler
 import h5InputHandler
-import re
 
 
 class InputHandlerFactory():

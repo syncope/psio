@@ -82,7 +82,7 @@ if __name__ == "__main__":
     import pyqtgraph as pg
 
     for i in io:
-        print(i.shape)
+#        print(i.shape)
         print(repr(i))
         pg.image(i)
         c = input('please press enter\n')
