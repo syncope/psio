@@ -155,24 +155,9 @@ class H5InputHandler(inputHandler.InputHandler):
         self._nextFile()
 
 if __name__ == "__main__":
-    files = [
-        "/home/rosem/workspace/data/jans_complicated_nexus_file/test1_00813.nxs"]
+    files = ["test/test_data/lambda750ksi/Calli_align_00004.ndf"]
+    path = "/entry/instrument/detector/data"
 
-    path = "/entry/instrument/pilatus/data"
-    attribute = "NX_class"
     io = H5InputHandler()
-    #~ io.inputList(files, path, attribute)
     io.inputList(files, path, None)
     print(repr(io.getEntry(0)))
-    #~ import pyqtgraph as pg
-#~
-    #~ for i in io:
-        #~ print(i)
-        #~ if(inputHandler.six.PY2):
-            #~ c = raw_input('please press enter\n')
-        #~ else:
-            #~ c = input('please press enter\n')
-    #~ if(inputHandler.six.PY2):
-        #~ c = raw_input('please press enter\n')
-    #~ else:
-        #~ c = input('please press enter\n')
