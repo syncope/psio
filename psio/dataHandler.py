@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Christoph Rosemann, DESY, Notkestr. 85, D-22607 Hamburg
+# Copyright (C) 2016-17  Christoph Rosemann, DESY, Notkestr. 85, D-22607 Hamburg
 # email contact: christoph.rosemann@desy.de
 #
 # This program is free software; you can redistribute it and/or
@@ -54,13 +54,13 @@ class DataHandler():
 
 if __name__ == "__main__":
     files = [
-        "/home/rosem/workspace/data/examples/315029-pilatus100k-files/00001.tif",
-             "/home/rosem/workspace/data/examples/315029-pilatus100k-files/00002.tif"]
+        "test/test_data/hamamatsu_c4880_maxim/c_02.tif",
+        "test/test_data/hamamatsu_c4880_maxim/im_cont2_038.tif"]
 
     files2 = [
-        "/home/rosem/workspace/data/jans_complicated_nexus_file/test1_00813.nxs"]
+        "test/test_data/lambda750ksi/Calli_align_00004.ndf"]
 
-    path = "/entry/instrument/pilatus/data"
+    path = "/entry/instrument/detector/data"
 
     dh = DataHandler()
     ndg = DataHandler()
@@ -68,10 +68,10 @@ if __name__ == "__main__":
     k = dh.create_reader(files)
     print(k)
     for f in k:
-        print ("trying it")
+        print ("reading tif")
 
     k2 = ndg.create_reader(files2, path)
     print(k2)
     for j in k2:
-        print(" and here we go")
+        print("reading nexus")
     
