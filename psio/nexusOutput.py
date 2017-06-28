@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Christoph Rosemann, DESY, Notkestr. 85, D-22607 Hamburg
+# Copyright (C) 2016-17  Christoph Rosemann, DESY, Notkestr. 85, D-22607 Hamburg
 # email contact: christoph.rosemann@desy.de
 #
 # This program is free software; you can redistribute it and/or
@@ -94,7 +94,7 @@ class NexusOutput():
 
 
 if(__name__ == "__main__"):
-    print("it's alive.")
+    print("It's working.")
     no = NexusOutput("test.ndf", recreate=True)
     no.addField("test", (0, 2, 2))
     no.addField("test2", (2, 2))

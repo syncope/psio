@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Christoph Rosemann, DESY, Notkestr. 85, D-22607 Hamburg
+# Copyright (C) 2016-17  Christoph Rosemann, DESY, Notkestr. 85, D-22607 Hamburg
 # email contact: christoph.rosemann@desy.de
 #
 # This program is free software; you can redistribute it and/or
@@ -129,28 +129,20 @@ class NexusInputHandler(inputHandler.InputHandler):
             return self.__next__()
 
 if __name__ == "__main__":
-    #~ files = ["/home/rosem/workspace/data/jans_complicated_nexus_file/test1_00813.nxs"]
-    #~ path = "entry/instrument/pilatus/data"
-    # ~ attribute = None # "NX_class"
-
-    files = [
-        "/home/rosem/workspace/diffraction_p06_start/test_data/run_16538_data_000012.h5"]
-    path = "entry/data/data"
+    files = ["test/test_data/lambda750ksi/Calli_align_00004.ndf"]
+    path = "/entry/instrument/detector/data"
     attribute = None
 
     io = NexusInputHandler()
     io.inputList(files, path, attribute)
 
-#    import pyqtgraph as pg
-
     for i in io:
         print(i)
-        # pg.image(i.array())
         if(inputHandler.six.PY2):
-            c = raw_input('please press enter FIRST \n')
+            c = raw_input('please press enter first.\n')
         else:
-            c = input('please press enter FIRST \n')
+            c = input('please press enter first.\n')
     if(inputHandler.six.PY2):
-        c = raw_input('please press enter 2nd\n')
+        c = raw_input('please press enter 2nd time.\n')
     else:
-        c = input('please press enter 2nd\n')
+        c = input('please press enter 2nd time.\n')
