@@ -39,7 +39,7 @@ class NexusInputHandler(inputHandler.InputHandler):
         self._attribute = None
         self._attributeRead = True
         self._currentFile = nexus.nxfile()
-        self._dataDimension = 2
+        self._imageDataDimension = 2
 
     def inputList(self, filenames, path, attribute):
         '''Pass the list of files and path that are to be opened.'''
@@ -47,9 +47,6 @@ class NexusInputHandler(inputHandler.InputHandler):
         self._fileIter = iter(self._fileList)
         self._field = path
         self._attribute = attribute
-
-    def setDimension(self, dimension):
-        self._dataDimension = dimension
 
     def __iter__(self):
         '''Implementation of the iterator protocol, part I.'''

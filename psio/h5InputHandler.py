@@ -39,7 +39,7 @@ class H5InputHandler(inputHandler.InputHandler):
         self._attribute = None
         self._singleValue = False
         self._currentFile = None
-        self._dataDimension = 2
+        self._imageDataDimension = 2
 
     def inputList(self, filenames, path, attribute):
         '''Pass the list of files that are to be opened.'''
@@ -47,9 +47,6 @@ class H5InputHandler(inputHandler.InputHandler):
         self._fileIter = iter(self._fileList)
         self._dataset = path
         self._attribute = attribute
-
-    def setDimension(self, dimension):
-        self._dataDimension = dimension
 
     def __iter__(self):
         '''Implementation of the iterator protocol, part I.'''
@@ -76,11 +73,11 @@ class H5InputHandler(inputHandler.InputHandler):
 
             if(self._attribute is None and self._singleValue is False):
 
-                if(len(currentField.shape) == self._dataDimension):
+                if(len(currentField.shape) == self._imageDataDimension):
                     self._singleValue = True
                     self._ddata = currentField
                     return self._ddata
-                elif(len(currentField.shape) != (self._dataDimension + 1)):
+                elif(len(currentField.shape) != (self._imageDataDimension + 1)):
                     raise ValueError(
                         "The dimension of the data is not correct.")
                 if(inputHandler.six.PY2):

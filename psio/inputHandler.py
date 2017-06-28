@@ -44,6 +44,3 @@ class InputHandler():
     def __iter__(self):
         pass
 
-    @abstractmethod
-    def setDimension(self):
-        pass

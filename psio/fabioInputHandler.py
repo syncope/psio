@@ -1,4 +1,4 @@
-# Copyright (C) 2016  Christoph Rosemann, DESY, Notkestr. 85, D-22607 Hamburg
+# Copyright (C) 2016-17  Christoph Rosemann, DESY, Notkestr. 85, D-22607 Hamburg
 # email contact: christoph.rosemann@desy.de
 #
 # This program is free software; you can redistribute it and/or
@@ -37,15 +37,11 @@ class FabioInputHandler(inputHandler.InputHandler):
         '''Construct by creating empty member variables.'''
         self._fileList = None
         self._ddata = None
-        self._dataDimension = 2
 
     def inputList(self, filenames, paths=None, attribute=None):
         '''Pass and store the list of files that are to be opened.'''
         self._fileList = filenames
         self._fileIter = iter(self._fileList)
-
-    def setDimension(self, dimension):
-        self._dataDimension = dimension
 
     def __iter__(self):
         '''Part one of iterator protocol implementation.'''
@@ -81,9 +77,10 @@ if __name__ == "__main__":
     io.inputList(files)
     import pyqtgraph as pg
 
+    print(repr(io))
     for i in io:
 #        print(i.shape)
         print(repr(i))
-        pg.image(i)
+        #~ pg.image(i)
         c = input('please press enter\n')
     c = input('please press enter\n')

@@ -44,13 +44,10 @@ class DataHandler():
                 filenames, path, attribute)
             self.fileHandler.inputList(filenames, path, attribute)
         except IOError:
-            print("Error with opening the file, bailing out.")
+            print("Error opening the file, bailing out.")
         except TypeError:
-            print ("WTF?")
+            print ("Wrong type for creating a reader, will not work.")
         return self.fileHandler
-
-    def setDimension(self, dimension):
-        self.fileHandler.setDimension(dimension)
 
 if __name__ == "__main__":
     files = [

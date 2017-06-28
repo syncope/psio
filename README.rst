@@ -23,6 +23,5 @@ In order to use the full functionality, the following requirements need to be me
  - h5py
  - fabio
  - pyqtgraph
- - re
  - pni
  - unittest
