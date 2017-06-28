@@ -24,11 +24,6 @@ except ImportError("pni nexus handler is not installed. The package will not ful
     pass
 
 try:
-    import re
-except ImportError("re is not installed. PSIO will not fully work without it."):
-    pass
-
-try:
     import pyqtgraph
 except ImportError("pyqtgraph is not installed. No display will be available."):
    pass
