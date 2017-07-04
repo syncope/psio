@@ -29,6 +29,7 @@ Or take a look at http://dx.doi.org/10.1107/S0021889813000150 .'''
 
 import fabio
 import inputHandler
+import copy
 
 
 class FabioInputHandler(inputHandler.InputHandler):
@@ -68,18 +69,15 @@ class FabioInputHandler(inputHandler.InputHandler):
 
 if __name__ == "__main__":
     files = [
-        "/home/rosem/workspace/data/examples/315029-pilatus100k-files/00001.tif",
-             "/home/rosem/workspace/data/examples/315029-pilatus100k-files/00002.tif",
-             "/home/rosem/workspace/data/examples/315029-pilatus100k-files/00003.tif",
-             "/home/rosem/workspace/data/pilatus1M_example.cbf"]
+             "test/test_data/pilatus1m/calib_agbeh_andre_00001_00001.cbf",
+             "test/test_data/hamamatsu_c4880_maxim/c_02.tif",
+             "test/test_data/hamamatsu_c4880_maxim/im_cont2_038.tif"]
 
     io = FabioInputHandler()
     io.inputList(files)
-    import pyqtgraph as pg
-
-    print(repr(io))
+    #~ import pyqtgraph as pg
     for i in io:
-#        print(i.shape)
+        #~ print(i.shape)
         print(repr(i))
         #~ pg.image(i)
         c = input('please press enter\n')

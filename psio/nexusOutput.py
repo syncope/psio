@@ -20,11 +20,11 @@
 '''Implementation for handling files based on NeXus file format.
 For more information on NeXus visit www.nexusformat.org'''
 
-
+import outputBase
 import pni.io.nx.h5 as nexus
 
 
-class NexusOutput():
+class NexusOutput(outputBase.OutputBase):
 
     def __init__(self, filename, recreate):
         self._file = nexus.create_file(filename, overwrite=recreate)
