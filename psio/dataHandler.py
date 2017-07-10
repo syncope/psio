@@ -28,10 +28,12 @@ import inputHandlerFactory
 
 class DataHandler():
 
-    def __init__(self):
+    def __init__(self, filenames=None, path=None, attribute=None):
         '''The constructor instantiates a factory.'''
         self.readerFactory = inputHandlerFactory.InputHandlerFactory()
         self.fileHandler = None
+        if(filenames != None):
+            self.create_reader(filenames, path, attribute)
 
     def create_reader(self, filenames, path=None, attribute=None):
         '''Creates a file reader object. First argument has to be either
@@ -47,6 +49,12 @@ class DataHandler():
             print("Error opening the file, bailing out.")
         except TypeError:
             print ("Wrong type for creating a reader, will not work.")
+        return self.fileHandler
+
+    def __next__(self):
+        return self.fileHandler.__next__()
+    
+    def __iter__(self):
         return self.fileHandler
 
 if __name__ == "__main__":
@@ -72,3 +80,13 @@ if __name__ == "__main__":
     for j in k2:
         print("reading nexus")
     
+    dh2 = DataHandler([
+        "test/test_data/hamamatsu_c4880_maxim/c_02.tif",
+        "test/test_data/hamamatsu_c4880_maxim/im_cont2_038.tif"])
+    for j in dh2:
+        print(j)
+    
+    dh3 = DataHandler("test/test_data/lambda750ksi/Calli_align_00004.ndf",
+        path = "/entry/instrument/detector/data")
+    for i in dh3:
+        print(i)
