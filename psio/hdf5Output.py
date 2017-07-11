@@ -42,82 +42,40 @@ class HDF5Output(outputBase.OutputBase):
         self.write()
         self._file.close()
 
-    def addField(self, name, dimension, dtype="float32"):
-        '''Adding a field to hold data at the default location.'''
-        try:
-            correctedDimension = dimension[1:]
-        except TypeError:
-            correctedDimension = (dimension, )
-        chunk = (1,) + correctedDimension
+    def addDataField(self, name, data):
+        '''Add data to the default location.'''
+        # size and shape are taken directly from data
         try:
             if name in self._datasets:
                 raise ValueError("Trying to create a field/dataset that already exists.")
             else:
-                print(" CREATE DS with chunks = " + str(chunk))
                 self._datasets[name] = self._defaultGroup.create_dataset(
-                    name=name, dtype=dtype, shape=chunk, chunks=chunk, maxshape=(None, correctedDimension))
+                    name=name, data=data)
         except AttributeError:
             print(
                 "Could not create a field to hold images/data.")
 
-    def addSingleImageField(self, name, dimension, dtype="float32"):
-        pass
-        '''Adding a field to hold a single image.'''
-        try:
-            self._fields[name] = self._defaultGroup.create_field(
-                name, dtype, dimension)
-        except AttributeError:
-            print(
-                "Could not create a single image field element.")
-
-    def addDataToField(self, name, data):
-        try:
-            initialshape = self._datasets[name].shape
-            print("shape bf: " + repr(initialshape))
-            newlength = initialshape[0]+1
-            temptpl = (newlength, ) + initialshape[1:]
-            print(" trying hard to create: " + repr(temptpl))
-            self._datasets[name].resize(temptpl)
-            print(" shape af: " + repr(self._datasets[name].shape))
-            self._datasets[name][-1, ...] = data
-        except KeyError:
-            print("Field " + name + " doesn't exist.")
-
-    def addSingleImageToField(self, name, data):
+     def addAttributeToField(self, fieldname, title, value):
         pass
         try:
-            self._fields[name].write(data)
-        except KeyError:
-            print("Field " + name + " doesn't exist.")
-
-    def addAttributeToField(self, fieldname, title, value):
-        pass
-        try:
-            self._fields[fieldname].attributes.create(
-                title, "float64")[...] = value
+            self._datasets[fieldname].attrs.create( title, value)
         except KeyError:
             print("Field " + fieldname + " doesn't exist.")
 
     def addCommentToField(self, fieldname, title, comment):
         pass
         try:
-            self._fields[fieldname].attributes.create(
-                title, "str")[...] = comment
+            self._datasets[fieldname].attrs.create( title, np.string_(comment))
         except KeyError:
             print("Field " + fieldname + " doesn't exist.")
 
 
 if(__name__ == "__main__"):
-    print("It's working.")
-    no = HDF5Output("test.h5", mode='w')
-    no.addField("test", (0, 2, 2))
-    no.addField("test2", (2, 2))
-    #~ no.addCommentToField("test", "com2", "we dont need no")
-    #~ no.addAttributeToField("test2", "answer", 42.)
 
-    import numpy as np
-    d = np.array([1, 2, 3, 4])
-    print(d)
-    no.addDataToField("test", d)
-    no.addSingleImageToField("test2", d)
+    no = HDF5Output("test.h5", mode='w')
+    no.addDataField("test", (0, 2, 2))
+    no.addDataField("test2", (2, 2))
+    no.addCommentToField("test", "com2", "we dont need no")
+    no.addAttributeToField("test2", "answer", 42.)
+
     no.close()

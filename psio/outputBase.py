@@ -27,18 +27,9 @@ class OutputBase():
     def close(self):
         pass
 
-    def addField(self, name, dimension, dtype="float32"):
+    def addDataField(self, name, dimension, dtype="float32"):
         pass
-        
-    def addSingleImageField(self, name, dimension, dtype="float32"):
-        pass
-        
-    def addDataToField(self, name, data):
-        pass
-        
-    def addSingleImageToField(self, name, data):
-        pass
-        
+       
     def addAttributeToField(self, fieldname, title, value):
         pass
         
