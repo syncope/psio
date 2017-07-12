@@ -28,12 +28,13 @@ import numpy as np
 class HDF5Output(outputBase.OutputBase):
 
     def __init__(self, filename, mode='w'):
-        self._file = h5py.File(filename,mode=mode)
+        self._file = h5py.File(filename, mode=mode)
         self._entry = self._file.create_group("entry")
         self._entry.attrs["NX_class"] = "NXentry"
         self._defaultGroup = self._entry.create_group("data")
         self._defaultGroup.attrs["NX_class"] = "NXdata"
-        self._datasets = {} # called fields in nexus
+        # datasets are called fields in nexus
+        self._datasets = {}
 
     def write(self):
         self._file.flush()
@@ -47,7 +48,8 @@ class HDF5Output(outputBase.OutputBase):
         # size and shape are taken directly from data
         try:
             if name in self._datasets:
-                raise ValueError("Trying to create a field/dataset that already exists.")
+                raise ValueError("Trying to create a field/dataset
+                                 that already exists.")
             else:
                 self._datasets[name] = self._defaultGroup.create_dataset(
                     name=name, data=data)
@@ -55,17 +57,17 @@ class HDF5Output(outputBase.OutputBase):
             print(
                 "Could not create a field to hold images/data.")
 
-     def addAttributeToField(self, fieldname, title, value):
+    def addAttributeToField(self, fieldname, title, value):
         pass
         try:
-            self._datasets[fieldname].attrs.create( title, value)
+            self._datasets[fieldname].attrs.create(title, value)
         except KeyError:
             print("Field " + fieldname + " doesn't exist.")
 
     def addCommentToField(self, fieldname, title, comment):
         pass
         try:
-            self._datasets[fieldname].attrs.create( title, np.string_(comment))
+            self._datasets[fieldname].attrs.create(title, np.string_(comment))
         except KeyError:
             print("Field " + fieldname + " doesn't exist.")
 

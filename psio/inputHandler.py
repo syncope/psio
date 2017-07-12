@@ -43,4 +43,3 @@ class InputHandler():
     @abstractmethod
     def __iter__(self):
         pass
-

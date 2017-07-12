@@ -68,17 +68,13 @@ class FabioInputHandler(inputHandler.InputHandler):
             self.__next__()
 
 if __name__ == "__main__":
-    files = [
-             "test/test_data/pilatus1m/calib_agbeh_andre_00001_00001.cbf",
+    files = ["test/test_data/pilatus1m/calib_agbeh_andre_00001_00001.cbf",
              "test/test_data/hamamatsu_c4880_maxim/c_02.tif",
              "test/test_data/hamamatsu_c4880_maxim/im_cont2_038.tif"]
 
     io = FabioInputHandler()
     io.inputList(files)
-    #~ import pyqtgraph as pg
     for i in io:
-        #~ print(i.shape)
         print(repr(i))
-        #~ pg.image(i)
         c = input('please press enter\n')
     c = input('please press enter\n')

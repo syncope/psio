@@ -32,7 +32,7 @@ class DataHandler():
         '''The constructor instantiates a factory.'''
         self.readerFactory = inputHandlerFactory.InputHandlerFactory()
         self.fileHandler = None
-        if(filenames != None):
+        if filenames is not None:
             self.create_reader(filenames, path, attribute)
 
     def create_reader(self, filenames, path=None, attribute=None):
@@ -53,7 +53,7 @@ class DataHandler():
 
     def __next__(self):
         return self.fileHandler.__next__()
-    
+
     def __iter__(self):
         return self.fileHandler
 
@@ -69,7 +69,7 @@ if __name__ == "__main__":
 
     dh = DataHandler()
     ndg = DataHandler()
-    
+
     k = dh.create_reader(files)
     print(k)
     for f in k:
@@ -79,14 +79,14 @@ if __name__ == "__main__":
     print(k2)
     for j in k2:
         print("reading nexus")
-    
+
     dh2 = DataHandler([
         "test/test_data/hamamatsu_c4880_maxim/c_02.tif",
         "test/test_data/hamamatsu_c4880_maxim/im_cont2_038.tif"])
     for j in dh2:
         print(j)
-    
+
     dh3 = DataHandler("test/test_data/lambda750ksi/Calli_align_00004.ndf",
-        path = "/entry/instrument/detector/data")
+                      path="/entry/instrument/detector/data")
     for i in dh3:
         print(i)

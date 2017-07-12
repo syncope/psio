@@ -23,15 +23,15 @@
 class OutputBase():
     def write(self):
         pass
-        
+
     def close(self):
         pass
 
     def addDataField(self, name, dimension, dtype="float32"):
         pass
-       
+
     def addAttributeToField(self, fieldname, title, value):
         pass
-        
+
     def addCommentToField(self, fieldname, title, comment):
         pass

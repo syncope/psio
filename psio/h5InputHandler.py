@@ -148,7 +148,7 @@ class H5InputHandler(inputHandler.InputHandler):
             print("An exception occurred while trying to access the data.")
 
     def advanceFile(self):
-         # advance the file iterator
+        # advance the file iterator
         self._nextFile()
 
 if __name__ == "__main__":
