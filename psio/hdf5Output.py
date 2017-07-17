@@ -48,14 +48,13 @@ class HDF5Output(outputBase.OutputBase):
         # size and shape are taken directly from data
         try:
             if name in self._datasets:
-                raise ValueError("Trying to create a field/dataset
-                                 that already exists.")
+                raise ValueError("Trying to create a field/dataset"
+                    " that already exists.")
             else:
                 self._datasets[name] = self._defaultGroup.create_dataset(
                     name=name, data=data)
         except AttributeError:
-            print(
-                "Could not create a field to hold images/data.")
+            print("Could not create a field to hold images/data.")
 
     def addAttributeToField(self, fieldname, title, value):
         pass
