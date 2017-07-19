@@ -20,7 +20,6 @@
 
 
 import fabioInputHandler
-import nexusInputHandler
 import h5InputHandler
 
 
@@ -36,8 +35,6 @@ class InputHandlerFactory():
             filenames[0], path, attribute)
         if(handlertype == "fabio"):
             return fabioInputHandler.FabioInputHandler()
-        elif (handlertype == "nexus"):
-            return nexusInputHandler.NexusInputHandler()
         elif (handlertype == "h5"):
             return h5InputHandler.H5InputHandler()
         else:

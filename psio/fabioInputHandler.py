@@ -29,7 +29,6 @@ Or take a look at http://dx.doi.org/10.1107/S0021889813000150 .'''
 
 import fabio
 import inputHandler
-import copy
 
 
 class FabioInputHandler(inputHandler.InputHandler):

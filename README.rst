@@ -8,7 +8,7 @@ For container data (e.g. hdf5) random access ("indexing") is possible.
 
 
 Supported file formats derive from the incorporated libraries: 
-   - hdf5 / NeXus: h5py and  python-pni (by E. Wintersberger, DESY)
+   - hdf5: h5py
    - .edf, .cbf, .tiff, ... -- all supported formats by fabio (by J.Kieffer, ESRF)
 Inclusion of fio files and plain numpy array files is in progress.
 
@@ -19,9 +19,6 @@ A simple graphical data viewer is also included.
 In order to use the full functionality, the following requirements need to be met:
  - numpy
  - six
- - abc
  - h5py
  - fabio
  - pyqtgraph
- - pni
- - unittest
