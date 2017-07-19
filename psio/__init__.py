@@ -1,11 +1,11 @@
 try:
     import h5py
-except ImportError("h5py is not installed. Please install for full functionality."):
+except ImportError("h5py is not installed. Please install for full functionality in reading hdf5 data files."):
     pass
 
 try:
     import six
-except ImportError("six is not installed. The package will not work without it."):
+except ImportError("six is not installed. The package will probably not work without it."):
     pass
 
 try:
@@ -20,7 +20,7 @@ except ImportError("numpy is not installed. The package will not work without it
 
 try:
     import pni.io.nx.h5
-except ImportError("pni nexus handler is not installed. The package will not fully work without it."):
+except ImportError("pni nexus library is not installed. Access to NeXus functionality will be restricted to hdf5 (if available)."):
     pass
 
 try:
