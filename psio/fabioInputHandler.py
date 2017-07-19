@@ -68,6 +68,10 @@ class FabioInputHandler(inputHandler.InputHandler):
             self.__next__()
 
 if __name__ == "__main__":
+    print("Do simple testing by running as a script.")
+    print("Requires the test data to be present.\n")
+
+    print("Trying to read different file formats and print its contents:")
     files = ["test/test_data/pilatus1m/calib_agbeh_andre_00001_00001.cbf",
              "test/test_data/hamamatsu_c4880_maxim/c_02.tif",
              "test/test_data/hamamatsu_c4880_maxim/im_cont2_038.tif"]
@@ -76,5 +80,3 @@ if __name__ == "__main__":
     io.inputList(files)
     for i in io:
         print(repr(i))
-        c = input('please press enter\n')
-    c = input('please press enter\n')

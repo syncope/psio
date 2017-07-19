@@ -58,6 +58,9 @@ class DataHandler():
         return self.fileHandler
 
 if __name__ == "__main__":
+    print("Running a simple test of functionality.")
+    print("Requires test data to be available.\n")
+
     files = [
         "test/test_data/hamamatsu_c4880_maxim/c_02.tif",
         "test/test_data/hamamatsu_c4880_maxim/im_cont2_038.tif"]
@@ -71,21 +74,21 @@ if __name__ == "__main__":
     ndg = DataHandler()
 
     k = dh.create_reader(files)
-    print(k)
     for f in k:
-        print ("reading tif")
+        print ("reading a tif file")
 
     k2 = ndg.create_reader(files2, path)
-    print(k2)
     for j in k2:
-        print("reading nexus")
+        print("reading a nexus file")
 
+    print("\n show some data from the tif file reading:")
     dh2 = DataHandler([
         "test/test_data/hamamatsu_c4880_maxim/c_02.tif",
         "test/test_data/hamamatsu_c4880_maxim/im_cont2_038.tif"])
     for j in dh2:
         print(j)
 
+    print("\n show some data from the nexus file reading:")
     dh3 = DataHandler("test/test_data/lambda750ksi/Calli_align_00004.ndf",
                       path="/entry/instrument/detector/data")
     for i in dh3:

@@ -35,3 +35,7 @@ class OutputBase():
 
     def addCommentToField(self, fieldname, title, comment):
         pass
+
+
+if __name__ == "__main__":
+    print("Nothing to do here, class is just an interface definition.")

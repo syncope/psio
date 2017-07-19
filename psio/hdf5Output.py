@@ -49,7 +49,7 @@ class HDF5Output(outputBase.OutputBase):
         try:
             if name in self._datasets:
                 raise ValueError("Trying to create a field/dataset"
-                    " that already exists.")
+                                 " that already exists.")
             else:
                 self._datasets[name] = self._defaultGroup.create_dataset(
                     name=name, data=data)
@@ -72,6 +72,7 @@ class HDF5Output(outputBase.OutputBase):
 
 
 if(__name__ == "__main__"):
+    print("Testing the output capabilities.")
 
     no = HDF5Output("test.h5", mode='w')
     no.addDataField("test", (0, 2, 2))
@@ -80,3 +81,4 @@ if(__name__ == "__main__"):
     no.addAttributeToField("test2", "answer", 42.)
 
     no.close()
+    print("In case of success a new file called test.h5 should have been created.")

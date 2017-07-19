@@ -20,26 +20,23 @@
 There are no implemented functions, just the interface.
 These functions are used in the abstract data handler class.'''
 
-from abc import ABCMeta, abstractmethod
-
 # compatibility stuff:
 import six  # compatibility to make it work under python 2.7
 
 
-@six.add_metaclass(ABCMeta)
 class InputHandler():
     # std::py3 is:  class InputHandler(metaclass=ABCMeta):
 
-    @abstractmethod
     def inputList(self, files, path, attribute):
         '''Pass the list of files that are to be opened for reading.'''
         pass
 
-    @abstractmethod
     def __next__(self):
         '''If available, the (next) detector data item is returned.'''
         pass
 
-    @abstractmethod
     def __iter__(self):
         pass
+
+if __name__ == "__main__":
+    print("No functionality, just an abstract base class definition.")
