@@ -19,11 +19,6 @@ except ImportError("numpy is not installed. The package will not work without it
     pass
 
 try:
-    import pni.io.nx.h5
-except ImportError("pni nexus library is not installed. Access to NeXus functionality will be restricted to hdf5 (if available)."):
-    pass
-
-try:
     import pyqtgraph
 except ImportError("pyqtgraph is not installed. No display will be available."):
     pass
