@@ -19,8 +19,8 @@
 '''This a factory that creates implementation objects of an InputHandler.'''
 
 
-import fabioInputHandler
-import h5InputHandler
+from . import fabioInputHandler
+from . import h5InputHandler
 
 
 class InputHandlerFactory():

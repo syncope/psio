@@ -20,7 +20,7 @@
 '''Implementation for handling files based on HDF without pni library.
 Structure is the same, as well as the functionality.'''
 
-import outputBase
+from . import outputBase
 import h5py
 import numpy as np
 

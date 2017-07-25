@@ -22,7 +22,7 @@ For more information on HDF5 and Python visit http://www.h5py.org/'''
 
 
 import h5py
-import inputHandler
+from . import inputHandler
 
 
 class H5InputHandler(inputHandler.InputHandler):

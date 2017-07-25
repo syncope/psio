@@ -23,7 +23,7 @@ The usage pattern is straightforward:
  - a list (!) of filenames is passed
  - an iterator over all data in that files is returned.'''
 
-import inputHandlerFactory
+from . import inputHandlerFactory
 
 
 class DataHandler():

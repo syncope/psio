@@ -28,7 +28,7 @@ Or take a look at http://dx.doi.org/10.1107/S0021889813000150 .'''
 
 
 import fabio
-import inputHandler
+from . import inputHandler
 from future.utils import implements_iterator
 
 
