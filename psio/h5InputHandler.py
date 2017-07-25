@@ -18,7 +18,7 @@
 
 
 '''Implementation for handling files based on HDF5 file format.
-For more information on HDF5 and Python visit http://www.h5py.org/'''
+   For more information on HDF5 and Python visit http://www.h5py.org/'''
 
 
 import h5py
@@ -42,7 +42,14 @@ class H5InputHandler(inputHandler.InputHandler):
         self._imageDataDimension = 2
 
     def inputList(self, filenames, path, attribute):
-        '''Pass the list of files that are to be opened.'''
+        '''Creates the iterator object from the given list of files.
+
+            :param filenames: the list of file names
+            :param path: the location of the data element
+            :param attribute: optional, if an attribute is to be accessed
+            :type filenames: list of str
+            :type path: str
+            :type attribute: str'''
         self._fileList = filenames
         self._fileIter = iter(self._fileList)
         self._dataset = path
@@ -107,6 +114,8 @@ class H5InputHandler(inputHandler.InputHandler):
         return self._ddata
 
     def _nextFile(self):
+        '''Helper function to navigate through a list of files.'''
+
         self._singleValue = False
         if(inputHandler.six.PY2):
             self._currentFile = h5py.File(self._fileIter.next(), "r")
@@ -123,12 +132,25 @@ class H5InputHandler(inputHandler.InputHandler):
 
     if(inputHandler.six.PY2):
         def next(self):
+            '''Specific syntax for Python2.x since the call syntax of the iterator is different.'''
+
             return self.__next__()
 
     def getNumberOfEntries(self):
+        '''Helper function to obtain the number of elements to be processed.
+
+            :return: number of entries'''
+
         return self._nentries
 
     def getEntry(self, entrynumber):
+        '''Random access to the specified element.
+
+            :param entrynumber: the index of the element
+            :type entrynumber: int
+            :return: a data element, numpy array
+            :raises: IndexError if given element cannot be found'''
+
         if(self._currentFile is None):
             self.advanceFile()
         if(entrynumber >= self._nentries):

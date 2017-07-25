@@ -6,7 +6,11 @@ from os import path
 with open(path.join('.', 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
-# from sphinx.setup_command import BuildDoc
+from sphinx.setup_command import BuildDoc
+
+name='psio'
+version='0'
+release='0.1.0'
 
 setup(
     name='psio',
@@ -43,24 +47,18 @@ setup(
     extras_require={
         'test': ['files']
         },
-    #~ entry_points={
-        #~ 'console_scripts': [
-            #~ '',
-        #~ ],
 
-    #~ scripts=['bin/counting_bad_pixels.py',
-        #~ 'bin/simple_file_viewer.py',
+    scripts=['bin/counting_bad_pixels.py',
+        'bin/simple_file_viewer.py',
         #~ 'bin/simpleViewerG.ui',
-        #~ 'bin/simpleViewerGUI.py',
-        #~ 'bin/stupid_gisaxs-p03.py'],
+        'bin/simpleViewerGUI.py',
+        'bin/stupid_gisaxs-p03.py'],
     
-#    data_files = [ ( '',  ['COPYRIGHT','LICENSE']), ],
-
-    #~ cmdclass={'build_sphinx': BuildDoc,},
-    #~ command_options={
-        #~ 'build_sphinx': {
-            #~ 'project': ('setup.py', name),
-            #~ 'version': ('setup.py', version),
-            #~ 'release': ('setup.py', release)}},
+    cmdclass={'build_sphinx': BuildDoc,},
+    command_options={
+        'build_sphinx': {
+            'project': ('setup.py', name),
+            'version': ('setup.py', version),
+            'release': ('setup.py', release)}},
 )
 

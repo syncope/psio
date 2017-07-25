@@ -13,7 +13,6 @@ It builds heavily on a number of other libraries:
   * numpy (mostly arrays)
   * h5py
   * fabio by J. Kieffer et al., ESRF
-  * pni nexus by E. Wintersberger, DESY
   
 Core data format
 ----------------
@@ -92,15 +91,14 @@ In addition to this, random access of individual images/data elements in a hdf5/
 Using the library: Writing data
 -------------------------------
 
-The output format for data is hdf5, or more specifically NeXus.
-It is built on the Python wrapper pni.io.nx.h5 module.
-It adds some convenience functionality to this library.
+The output format for data is hdf5.
+It is emulated to be NeXus - like, that is the names, attributes and structure are identical to NeXus.
 
 The first step is as usual the module import:
 
 .. code-block:: python
     
-    import nexusOutput
+    import HDF5Output
 
 Please confirm the NeXus manual for more details, but in short a NeXus file is organized similar to a file system.
 There are directories (named groups) and files (named fields).
@@ -114,10 +112,10 @@ A full example showing all capabilities is:
 .. code-block:: python
 
     import numpy as np
-    import nexusOutput
+    import HDF5Output
 
     # create the output object with a name, and overwrite any existing file with the same name
-    no = NexusOutput("output.ndf", recreate=True)
+    no = HDF5Output("output.h5", recreate=True)
     
     # add some fields, the first will store several images of size 2x2, the second only one image
     no.addField("firstField", (0, 2, 2))

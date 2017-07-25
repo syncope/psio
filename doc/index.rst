@@ -8,10 +8,10 @@ Welcome to PSIO's documentation!
 
 This is the documentation for the Photon Science Input Output package -- PSIO.
 The package provides a unified access to different input formats.
-Internally it uses existing libraries, namely h5py, python-pni (by E. Wintersberger, DESY) and fabio (by J.Kieffer, ESRF).
+Internally it uses existing libraries, namely h5py and fabio (by J.Kieffer, ESRF).
 
 It provides an interface similar to standard files in Python.
-In addition random access ("indexing") is possible.
+In addition random access ("indexing") is possible, where applicable.
 
 Contents:
 

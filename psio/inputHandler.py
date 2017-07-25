@@ -16,9 +16,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA  02110-1301, USA.
 
-'''This is the abstract class for reading data.
-There are no implemented functions, just the interface.
-These functions are used in the abstract data handler class.'''
+'''Abstract interface class for reading data.
+   These functions are used in the also abstract data handler class.'''
 
 # compatibility stuff:
 import six  # compatibility to make it work under python 2.7
@@ -28,12 +27,23 @@ class InputHandler():
     # std::py3 is:  class InputHandler(metaclass=ABCMeta):
 
     def inputList(self, files, path, attribute):
-        '''Pass the list of files that are to be opened for reading.'''
+        '''Creates the iterator object on the given item.
+
+            :param files: a list of files
+            :param path: optional string for hdf5 data files
+            :param attribute: optional string for hdf5 data files
+            :type files: list of str
+            :type path: str
+            :type attribute: str
+            :return: InputHandler object instance'''
         pass
 
     def __next__(self):
-        '''If available, the (next) detector data item is returned.'''
+        '''Implements the iteator protocol for the call of the next element.
+
+            :raises: StopIteration at the end of the sequence'''
         pass
 
     def __iter__(self):
+        '''Returns the InputHandler object instance as part of the iterator protocol.'''
         pass

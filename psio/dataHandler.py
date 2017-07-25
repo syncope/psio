@@ -17,11 +17,12 @@
 # Boston, MA  02110-1301, USA.
 
 
-'''The data  handler is the central object for the user.
-It abstracts data access on two levels.
-The usage pattern is straightforward:
- - a list (!) of filenames is passed
- - an iterator over all data in that files is returned.'''
+'''The data handler is the central object for data access.
+   It abstracts data access on two levels.
+   The usage pattern is straightforward:
+   - a single file name or a list of filenames is passed
+   - an iterator over all data in that files is returned.'''
+
 
 from . import inputHandlerFactory
 
@@ -38,7 +39,17 @@ class DataHandler():
     def create_reader(self, filenames, path=None, attribute=None):
         '''Creates a file reader object. First argument has to be either
            a single filename or a list of filenames.
-           Second argument is only needed for path in NeXus/hdf5 files.'''
+           Second argument is only needed for path in NeXus/hdf5 files.
+
+           :param filenames: a single or more file name/s (as a list)
+           :param path: (optional) the location inside a hdf5 file
+           :param attribute: (optional) the name of an attribute in a hdf5 file
+           :type filenames: str or list of str
+           :type path: str
+           :type attribute: str
+           :raises: IOError if file(s) cannot be opened
+           :raises: TypeError if file type is unkown or cannot be recognized
+           :return: iterable DataHandler instance object'''
         if(not isinstance(filenames, list)):
             filenames = [filenames]
         try:

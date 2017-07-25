@@ -23,8 +23,8 @@
 
 
 '''This is an implementation of the file handler based on fabio.
-Please find more information on fabio in the source code of this file.
-Or take a look at http://dx.doi.org/10.1107/S0021889813000150 .'''
+   Please find more information on fabio in the source code of this file.
+   Or take a look at http://dx.doi.org/10.1107/S0021889813000150 .'''
 
 
 import fabio
@@ -41,7 +41,14 @@ class FabioInputHandler(inputHandler.InputHandler):
         self._ddata = None
 
     def inputList(self, filenames, paths=None, attribute=None):
-        '''Pass and store the list of files that are to be opened.'''
+        '''Used to pass the list of files that are to be opened.
+
+            :param filenames: the names of the files
+            :param paths: fixed to None, not applicable
+            :param attribute: fixed to None, not applicable
+            :type filenames: list of str
+            :return: nothing'''
+
         self._fileList = filenames
         self._fileIter = iter(self._fileList)
 

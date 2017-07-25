@@ -44,18 +44,18 @@ psio.inputHandlerFactory module
     :undoc-members:
     :show-inheritance:
 
-psio.nexusInputHandler module
+psio.OutputBase module
 -----------------------------
 
-.. automodule:: psio.nexusInputHandler
+.. automodule:: psio.outputBase
     :members:
     :undoc-members:
     :show-inheritance:
 
-psio.nexusOutput module
+psio.HDF5Output module
 -----------------------
 
-.. automodule:: psio.nexusOutput
+.. automodule:: psio.hdf5Output
     :members:
     :undoc-members:
     :show-inheritance:
