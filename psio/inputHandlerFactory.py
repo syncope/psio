@@ -48,6 +48,3 @@ class InputHandlerFactory():
             return "h5"
         else:
             return "h5"
-
-if __name__ == "__main__":
-    print("Nothing to test here, the class determines the type and creates a compatible instance.")

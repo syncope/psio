@@ -69,16 +69,3 @@ class HDF5Output(outputBase.OutputBase):
             self._datasets[fieldname].attrs.create(title, np.string_(comment))
         except KeyError:
             print("Field " + fieldname + " doesn't exist.")
-
-
-if(__name__ == "__main__"):
-    print("Testing the output capabilities.")
-
-    no = HDF5Output("test.h5", mode='w')
-    no.addDataField("test", (0, 2, 2))
-    no.addDataField("test2", (2, 2))
-    no.addCommentToField("test", "com2", "we dont need no")
-    no.addAttributeToField("test2", "answer", 42.)
-
-    no.close()
-    print("In case of success a new file called test.h5 should have been created.")

@@ -37,6 +37,3 @@ class InputHandler():
 
     def __iter__(self):
         pass
-
-if __name__ == "__main__":
-    print("No functionality, just an abstract base class definition.")

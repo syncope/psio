@@ -150,15 +150,3 @@ class H5InputHandler(inputHandler.InputHandler):
     def advanceFile(self):
         # advance the file iterator
         self._nextFile()
-
-if __name__ == "__main__":
-    print("Testing read capabilities.")
-    print("Needs test data to be present.\n")
-
-    files = ["test/test_data/lambda750ksi/Calli_align_00004.ndf"]
-    path = "/entry/instrument/detector/data"
-
-    io = H5InputHandler()
-    io.inputList(files, path, None)
-    print("Data has been read and is:")
-    print(repr(io.getEntry(0)))
