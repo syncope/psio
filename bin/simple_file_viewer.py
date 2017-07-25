@@ -3,7 +3,7 @@ from PyQt4 import QtCore, QtGui
 
 from simpleViewerGUI import Ui_MainWindow
 
-import fabioInputHandler as fab
+import psio
 
 import json
 
@@ -27,14 +27,16 @@ class MyForm(QtGui.QMainWindow):
                 
         if (fname == ''):
             return
-        io = fab.FabioInputHandler()
-        io.inputList(fname)
+        io = psio.dataHandler.DataHandler()
+        io.create_reader(fname)
         #self.head = io.getHeader()
         #info = json.dumps(self.head)
         #self.ui.xyz.setText(info)
 
-        self.nda = io.yieldDData().array()
-        self.ui.displaypart.setImage(self.nda)
+        self.nda = None
+        for d in io:
+            self.nda = d
+            self.ui.displaypart.setImage(self.nda)
     
 
 if __name__ == "__main__":

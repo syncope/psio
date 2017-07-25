@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'simpleViewerG.ui'
 #
-# Created: Thu Apr 14 09:19:27 2016
+# Created: Tue Jul 25 10:40:15 2017
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,15 +31,9 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.gridLayout_2 = QtGui.QGridLayout(self.centralwidget)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.xyz = QtGui.QTextBrowser(self.centralwidget)
-        self.xyz.setObjectName(_fromUtf8("xyz"))
-        self.horizontalLayout.addWidget(self.xyz)
-        self.gridLayout_2.addLayout(self.horizontalLayout, 0, 1, 1, 1)
         self.displaypart = ImageView(self.centralwidget)
         self.displaypart.setObjectName(_fromUtf8("displaypart"))
-        self.gridLayout_2.addWidget(self.displaypart, 0, 2, 1, 1)
+        self.gridLayout_2.addWidget(self.displaypart, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 928, 19))
