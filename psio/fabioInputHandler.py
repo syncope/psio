@@ -74,3 +74,10 @@ class FabioInputHandler(inputHandler.InputHandler):
     if(inputHandler.six.PY2):
         def next(self):
             self.__next__()
+
+    def getTotalNumberOfEntries(self):
+        return len(self._fileList)
+
+    def getEntry(self, index):
+        raise TypeError("This type of data handler only works with single" +
+                        " image data. The function does not apply.")

@@ -47,3 +47,11 @@ class InputHandler():
     def __iter__(self):
         '''Returns the InputHandler object instance as part of the iterator protocol.'''
         pass
+
+    def getTotalNumberOfEntries(self):
+        '''Calculates the total number of entries for the given files.'''
+        pass
+
+    def getEntry(self, index):
+        '''If case of a multi-image file, the entry at the given index is returned.'''
+        pass

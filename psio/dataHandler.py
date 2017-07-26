@@ -34,9 +34,9 @@ class DataHandler():
         self.readerFactory = inputHandlerFactory.InputHandlerFactory()
         self.fileHandler = None
         if filenames is not None:
-            self.create_reader(filenames, path, attribute)
+            self._create_reader(filenames, path, attribute)
 
-    def create_reader(self, filenames, path=None, attribute=None):
+    def _create_reader(self, filenames, path=None, attribute=None):
         '''Creates a file reader object. First argument has to be either
            a single filename or a list of filenames.
            Second argument is only needed for path in NeXus/hdf5 files.
@@ -67,3 +67,9 @@ class DataHandler():
 
     def __iter__(self):
         return self.fileHandler
+
+    def getTotalNumberOfEntries(self):
+        return self.fileHandler.getTotalNumberOfEntries()
+
+    def getEntry(self, index):
+        return self.fileHandler.getEntry(index)

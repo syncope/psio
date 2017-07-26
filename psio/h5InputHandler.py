@@ -29,19 +29,21 @@ class H5InputHandler(inputHandler.InputHandler):
 
     '''This is the implementation of the InputHandler for NeXus.'''
 
-    def __init__(self):
+    def __init__(self, files=None, path=None, attribute=None):
         '''The constructor defines an empty set of member variables.'''
-        self._fileList = None
+        self._fileList = files
         self._fileIter = None
-        self._dataset = None
+        self._dataset = path
         self._dataIter = None
         self._nentries = None
-        self._attribute = None
+        self._attribute = attribute
         self._singleValue = False
         self._currentFile = None
         self._imageDataDimension = 2
+        if(files is not None and path is not None):
+            self._fileIter = iter(files)
 
-    def inputList(self, filenames, path, attribute):
+    def inputList(self, filenames, path, attribute=None):
         '''Creates the iterator object from the given list of files.
 
             :param filenames: the list of file names
@@ -136,12 +138,21 @@ class H5InputHandler(inputHandler.InputHandler):
 
             return self.__next__()
 
-    def getNumberOfEntries(self):
+    def getTotalNumberOfEntries(self):
         '''Helper function to obtain the number of elements to be processed.
 
             :return: number of entries'''
+        # possibly a lengthy calculation
+        # iterate over all files and sum up the total number of elements
+        # in all files!
+        fileIter = iter(self._fileList)
+        nentries = 0
+        for f in fileIter:
+            cf = h5py.File(f, "r")
+            nentries += cf.get(self._dataset).shape[0]
+            cf.close()
 
-        return self._nentries
+        return nentries
 
     def getEntry(self, entrynumber):
         '''Random access to the specified element.
