@@ -38,6 +38,7 @@ class FabioInputHandler(inputHandler.InputHandler):
     def __init__(self, files=None):
         '''Construct by creating empty member variables.'''
         self._fileList = files
+        self._fileIter = None
         self._ddata = None
         if(files is not None):
             self._fileIter = iter(self._fileList)
