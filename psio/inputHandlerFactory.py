@@ -57,7 +57,7 @@ class InputHandlerFactory():
         '''whether it is a hdf5 file.'''
         if(path is None):
             return "fabio"
-        elif(attribute is None):
+        elif(path is not None):
             return "h5"
         else:
-            return "h5"
+            return "unknown"
