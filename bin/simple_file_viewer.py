@@ -27,8 +27,7 @@ class MyForm(QtGui.QMainWindow):
                 
         if (fname == ''):
             return
-        io = psio.dataHandler.DataHandler()
-        io.create_reader(fname)
+        io = psio.dataHandler.DataHandler(fname)
         #self.head = io.getHeader()
         #info = json.dumps(self.head)
         #self.ui.xyz.setText(info)
