@@ -35,10 +35,12 @@ from future.utils import implements_iterator
 @implements_iterator
 class FabioInputHandler(inputHandler.InputHandler):
 
-    def __init__(self):
+    def __init__(self, files=None):
         '''Construct by creating empty member variables.'''
-        self._fileList = None
+        self._fileList = files
         self._ddata = None
+        if(files is not None):
+            self._fileIter = iter(self._fileList)
 
     def inputList(self, filenames, paths=None, attribute=None):
         '''Used to pass the list of files that are to be opened.
