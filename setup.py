@@ -44,10 +44,8 @@ setup(
     
     package_dir = { 'psio':'psio',},
     
-    extras_require={
-        'test': ['files']
-        },
-
+    include_package_data=True,
+    
     scripts=['bin/simple_file_viewer.py',
              'bin/simpleViewerGUI.py'],
     

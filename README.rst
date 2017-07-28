@@ -6,7 +6,7 @@ In it's most simple form it yields an iterator to the data numpy array(s) for th
 This interface is very similar to reading of standard files in Python.
 For container data (e.g. hdf5) random access ("indexing") is possible.
 
-Supported file formats derive from the incorporated libraries: 
+Supported file formats derive from the incorporated libraries:
    - hdf5: h5py
    - .edf, .cbf, .tiff, ... -- all supported formats by fabio (by J.Kieffer, ESRF)
 Inclusion of fio files and plain numpy array files is in progress.
