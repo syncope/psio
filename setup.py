@@ -48,11 +48,8 @@ setup(
         'test': ['files']
         },
 
-    scripts=['bin/counting_bad_pixels.py',
-        'bin/simple_file_viewer.py',
-        #~ 'bin/simpleViewerG.ui',
-        'bin/simpleViewerGUI.py',
-        'bin/stupid_gisaxs-p03.py'],
+    scripts=['bin/simple_file_viewer.py',
+             'bin/simpleViewerGUI.py'],
     
     cmdclass={'build_sphinx': BuildDoc,},
     command_options={
