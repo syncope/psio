@@ -24,3 +24,11 @@ In order to use the full functionality, the following requirements need to be me
  - pyqtgraph
 
 The package is universal, meaning that it works both with Python 2 and 3.
+
+You can either install it via pip install (once it's been uploaded).
+
+The most simple way is to clone the repository and expand your (PYTHON)PATH variable to the base directory.
+
+If you want, you can also create the documentation via
+python setup.py build_sphinx
+python3 setup.py build_sphinx
