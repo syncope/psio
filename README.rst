@@ -18,6 +18,7 @@ A simple graphical data viewer is also included.
 In order to use the full functionality, the following requirements need to be met:
  - numpy
  - future
+ - sphinx
  - six
  - h5py
  - fabio
