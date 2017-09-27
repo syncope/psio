@@ -1,0 +1,11 @@
+topics, unsorted:
+
+- there is no docstring for the module !
+- think about the structure again:
+    one size fits all vs base class plus extensions
+
+:: right now: no meta data available., but
+    == comes free when reading fabio data
+    == doesn't work with 1D data (FIO, SPEC)
+
+--> extend the concept, 1D and 2D data? data objects to be determined at runtime?
