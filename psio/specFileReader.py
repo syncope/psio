@@ -25,7 +25,12 @@
 
 
 import numpy as np
-from StringIO import StringIO   # StringIO behaves like a file object
+try:
+    from cStringIO import StringIO # StringIO behaves like a file object
+except ImportError: # no more StringIO in Python3 -> different module
+    from io import StringIO
+
+from scanData import ScanData
 
 class SpecFileReader():
     def __init__(self, fname):
@@ -34,11 +39,11 @@ class SpecFileReader():
         self._scanList = []
         self._scanDataList = []
 
-    def read(self):
+    def read(self, start=None, end=None):
         try:
             _file = open(self._fname, 'r')
         except(IOError):
-            print("File " + str(self._fname) + " can't be opened for reading.")
+            logger.error("[SpecFileReader]: File " + str(self._fname) + " can't be opened for reading.")
         
         # start iteration to create individual scan objects
         nextScan = rawScan()
@@ -52,11 +57,24 @@ class SpecFileReader():
         if nextScan is not None:
             self._rawScanList.append(nextScan)
 
+        # convert the raw objects into scan data
         for rawS in self._rawScanList:
-            self._scanDataList.append(rawS.convertToScanData())
+            converted = rawS.convertToScanData()
+            if converted is not None:
+                if self.checkValidScanID(converted.getScanNumber(), start, end):
+                    self._scanDataList.append(converted)
 
         return self._scanDataList
 
+    def checkValidScanID(self, scanNumber, start, end):
+        if start is None and end is None:
+            return True
+        elif start is not None and end is None:
+            return scanNumber >= start
+        elif start is None and end is not None:
+            return scanNumber <= end
+        elif start is not None and end is not None:
+            return (scanNumber >= start) and (scanNumber <= end)
 
 class rawScan():
     '''Placeholder object for disassembling the spec file'''
@@ -69,7 +87,7 @@ class rawScan():
         self._lines.append(line)
         if line.split(' ')[0][0] != '#':
            self._dataString += line
-        
+    
     def convertToScanData(self):
         '''Create the scanData object from the raw file objects.'''
         # get the different comment fields, as specified
@@ -113,85 +131,22 @@ class rawScan():
         noc = sd.getNumberOfColumns()
         
         if(self._dataString == ''):
-            print("no data to read in scan number " + str(sd.getScanNumber()))
-            return
+            logger.info("[SpecFileReader] No data to read in scan number " + str(sd.getScanNumber()))
+            return None
 
         # get the data into numpy arrays
         sio = StringIO(self._dataString)
         
         multi = np.loadtxt(sio, unpack=True)
-        sd.addDataDict( {(i, labels[i]): multi[i] for i in range(noc) } )
+        sd.addDataDict( {labels[i]: multi[i] for i in range(noc) } )
+        sd.addLabelDict( {i: labels[i] for i in range(noc) } )
 
-        #~ sd.dump()
         return sd
 
-
-class ScanData():
-    '''This is the atomic data exchange object. It consists of all
-       information that is nneded for a scan.'''
+if __name__ ==  "__main__":
+    sfr = SpecFileReader("MnCo15.spc")
+    scandata = sfr.read()
+    print("there are " + str(len(scandata)) + " elements")
     
-    def __init__(self):
-        self._startline = ''
-        self._number = 0
-        self._username = ''
-        self._date = ''
-        self._comments = []
-        self._customdata = {}
-        self._noc = 0
-        self._labels = []
-        self._dataDict = {}
-
-    def getScanNumber(self):
-        return self._number
-
-    def getLabels(self):
-        return self._labels
-
-    def getNumberOfColumns(self):
-        return self._noc
-
-    def setStartline(self, sl):
-        self._startline = sl
-        self.setScanNumber(sl[0])
-
-    def setScanNumber(self, number):
-        self._number = number
-
-    def setUsername(self, username):
-        self._username = username
-
-    def setDate(self, date):
-        self._date = date
-    
-    def addComment(self, comment):
-        self._comments.extend(comment)
-
-    def addCustomdataDict(self, dic):
-        self._customdata = dic
-
-    def setNumberOfColumns(self, noc):
-        self._noc = int(noc)
-
-    def addLabel(self, label):
-        self._labels.append(label)
-
-    def addDataDict(self, dic):
-        self._dataDict = dic 
-
-    def checkSanity(self):
-        '''Tests whether the minimal requirements are met.'''
-        if ( self._noc is not len(self._labels)):
-            return False
-        return (self._startline and self._labels and self._noc)
-
-    #~ def dump(self):
-        #~ print (" values are: ")
-        #~ print self._startline
-        #~ print self._number
-        #~ print self._username
-        #~ print self._date
-        #~ print self._comments
-        #~ print self._customdata
-        #~ print self._noc
-        #~ print self._labels
-        #~ print self._dataDict
+    for sd in scandata:
+        print("start id : " + repr(sd.getStartIdentifier(2)))
