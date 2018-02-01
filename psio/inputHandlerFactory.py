@@ -21,6 +21,7 @@
 
 from . import fabioInputHandler
 from . import h5InputHandler
+from . import specInputHandler
 
 
 class InputHandlerFactory():
@@ -30,7 +31,7 @@ class InputHandlerFactory():
     def __init__(self):
         pass
 
-    def create(self, filenames, path, attribute):
+    def create(self, filenames, path, attribute, typehint):
         '''Creates the right instance of InputHandler object.
 
             :param filenames: a list of file names
@@ -42,22 +43,27 @@ class InputHandlerFactory():
             :raises: TypeError if the file suffix is not recognized'''
 
         handlertype = self._determine_handlertype(
-            filenames[0], path, attribute)
+            path, typehint)
         if(handlertype == "fabio"):
             return fabioInputHandler.FabioInputHandler()
         elif (handlertype == "h5"):
             return h5InputHandler.H5InputHandler()
+        elif (handlerype == "spec"):
+            print("SPECPCPEPS")
+            return specInputHandler.SpecInputHandler()
         else:
             raise TypeError("Unrecognized IOHandler type.\
             Please chose an existing implementation.")
 
-    def _determine_handlertype(self, filename, path, attribute):
+    def _determine_handlertype(self, path, typehint):
         '''Internal determination function.
-            For now is based on the presence of a path to determine'''
-        '''whether it is a hdf5 file.'''
-        if(path is None):
+           For now is based on the presence of a path to determine
+           whether it is a hdf5 file.'''
+        if(path is None and typehint is None):
             return "fabio"
         elif(path is not None):
             return "h5"
+        elif(typehint == "spec"):
+            return "spec"            
         else:
             return "unknown"

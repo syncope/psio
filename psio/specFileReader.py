@@ -30,21 +30,24 @@ try:
 except ImportError: # no more StringIO in Python3 -> different module
     from io import StringIO
 
-from scanData import ScanData
+from psio.scanData import ScanData
 
 class SpecFileReader():
-    def __init__(self, fname):
+    def __init__(self, fname=None):
         self._fname = fname
         self._rawScanList = []
         self._scanList = []
         self._scanDataList = []
 
+    def open(self, fname):
+        self._fname = fname
+
     def read(self, start=None, end=None):
         try:
             _file = open(self._fname, 'r')
         except(IOError):
-            logger.error("[SpecFileReader]: File " + str(self._fname) + " can't be opened for reading.")
-        
+            pass # TO BE CHANGED!! 
+
         # start iteration to create individual scan objects
         nextScan = rawScan()
         for line in _file:
@@ -63,7 +66,7 @@ class SpecFileReader():
             if converted is not None:
                 if self.checkValidScanID(converted.getScanNumber(), start, end):
                     self._scanDataList.append(converted)
-
+        _file.close()
         return self._scanDataList
 
     def checkValidScanID(self, scanNumber, start, end):
@@ -86,7 +89,7 @@ class rawScan():
     def addLine(self, line):
         self._lines.append(line)
         if line.split(' ')[0][0] != '#':
-           self._dataString += line
+            self._dataString += line
     
     def convertToScanData(self):
         '''Create the scanData object from the raw file objects.'''
@@ -131,7 +134,7 @@ class rawScan():
         noc = sd.getNumberOfColumns()
         
         if(self._dataString == ''):
-            logger.info("[SpecFileReader] No data to read in scan number " + str(sd.getScanNumber()))
+            #~ logger.info("[SpecFileReader] No data to read in scan number " + str(sd.getScanNumber()))
             return None
 
         # get the data into numpy arrays
