@@ -25,6 +25,8 @@ import six  # compatibility to make it work under python 2.7
 
 class InputHandler():
     # std::py3 is:  class InputHandler(metaclass=ABCMeta):
+    def __init__(self):
+        pass
 
     def inputList(self, files, path, attribute):
         '''Creates the iterator object on the given item.

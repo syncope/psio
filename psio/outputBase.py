@@ -21,6 +21,8 @@
 
 
 class OutputBase():
+    def __init__(self):
+        pass
 
     def write(self):
         '''Commits the current state to permanent storage.'''
