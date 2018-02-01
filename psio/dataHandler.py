@@ -29,7 +29,7 @@ from . import inputHandlerFactory
 
 class DataHandler():
 
-    def __init__(self, filenames=None, path=None, attribute=None):
+    def __init__(self, filenames=None, path=None, attribute=None, typehint=None):
         '''The constructor instantiates a factory.'''
         self.readerFactory = inputHandlerFactory.InputHandlerFactory()
         self.fileHandler = None
@@ -54,7 +54,7 @@ class DataHandler():
             filenames = [filenames]
         try:
             self.fileHandler = self.readerFactory.create(
-                filenames, path, attribute)
+                filenames, path, attribute, typehint)
             self.fileHandler.inputList(filenames, path, attribute)
         except IOError:
             print("Error opening the file, bailing out.")
