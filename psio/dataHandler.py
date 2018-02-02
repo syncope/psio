@@ -73,3 +73,6 @@ class DataHandler():
 
     def getEntry(self, index):
         return self.fileHandler.getEntry(index)
+
+    def getFileHandler(self):
+        return self.fileHandler
