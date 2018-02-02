@@ -31,7 +31,7 @@ class InputHandlerFactory():
     def __init__(self):
         pass
 
-    def create(self, filenames, path, attribute, typehint):
+    def create(self, filenames, path=None, attribute=None, typehint=None):
         '''Creates the right instance of InputHandler object.
 
             :param filenames: a list of file names
@@ -43,13 +43,12 @@ class InputHandlerFactory():
             :raises: TypeError if the file suffix is not recognized'''
 
         handlertype = self._determine_handlertype(
-            path, typehint)
+            path, typehint=typehint)
         if(handlertype == "fabio"):
             return fabioInputHandler.FabioInputHandler()
         elif (handlertype == "h5"):
             return h5InputHandler.H5InputHandler()
-        elif (handlerype == "spec"):
-            print("SPECPCPEPS")
+        elif (handlertype == "spec"):
             return specInputHandler.SpecInputHandler()
         else:
             raise TypeError("Unrecognized IOHandler type.\

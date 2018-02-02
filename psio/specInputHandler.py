@@ -33,6 +33,7 @@ class SpecInputHandler(inputHandler.InputHandler):
         # abuse the attribute for now -- use as marker for start and end position
         self._startEnd = attribute
         self._reader = None
+        self._currentFile = None
         self._currentData = None
         
         if(files is not None and path is not None):
@@ -98,7 +99,7 @@ class SpecInputHandler(inputHandler.InputHandler):
         # create an iterator for the elements
         except(AttributeError):
             self._nentries = -1
-        self._dataIter = iter(self._currentdata)
+        self._dataIter = iter(self._currentData)
 
     if(inputHandler.six.PY2):
         def next(self):

@@ -38,19 +38,27 @@ class SpecFileReader():
         self._rawScanList = []
         self._scanList = []
         self._scanDataList = []
+        self._file = None
 
     def open(self, fname):
         self._fname = fname
 
+    def close(self):
+        try:
+            if(self._file.closed):
+                self._file.close()
+        except:
+            pass
+
     def read(self, start=None, end=None):
         try:
-            _file = open(self._fname, 'r')
+            self._file = open(self._fname, 'r')
         except(IOError):
             pass # TO BE CHANGED!! 
 
         # start iteration to create individual scan objects
         nextScan = rawScan()
-        for line in _file:
+        for line in self._file:
             if line in ['\n', '\r\n']:
                 if nextScan is not None:
                     self._rawScanList.append(nextScan)
@@ -66,7 +74,7 @@ class SpecFileReader():
             if converted is not None:
                 if self.checkValidScanID(converted.getScanNumber(), start, end):
                     self._scanDataList.append(converted)
-        _file.close()
+        self._file.close()
         return self._scanDataList
 
     def checkValidScanID(self, scanNumber, start, end):

@@ -34,9 +34,9 @@ class DataHandler():
         self.readerFactory = inputHandlerFactory.InputHandlerFactory()
         self.fileHandler = None
         if filenames is not None:
-            self._create_reader(filenames, path, attribute)
+            self._create_reader(filenames, path, attribute, typehint)
 
-    def _create_reader(self, filenames, path=None, attribute=None):
+    def _create_reader(self, filenames, path=None, attribute=None, typehint=None):
         '''Creates a file reader object. First argument has to be either
            a single filename or a list of filenames.
            Second argument is only needed for path in NeXus/hdf5 files.
@@ -54,7 +54,7 @@ class DataHandler():
             filenames = [filenames]
         try:
             self.fileHandler = self.readerFactory.create(
-                filenames, path, attribute, typehint)
+                filenames, path=path, attribute=attribute, typehint=typehint)
             self.fileHandler.inputList(filenames, path, attribute)
         except IOError:
             print("Error opening the file, bailing out.")
