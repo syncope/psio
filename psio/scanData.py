@@ -45,6 +45,12 @@ class ScanData():
     def getArray(self, key):
         return self._dataDict[key]
 
+    def getCustomKeys(self):
+        return self._customdata.keys()
+
+    def getCustomVar(self, key):
+        return self._customdata[key]
+
     def getStartline(self):
         return self._startline
 
