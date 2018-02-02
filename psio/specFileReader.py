@@ -159,5 +159,5 @@ if __name__ ==  "__main__":
     scandata = sfr.read()
     print("there are " + str(len(scandata)) + " elements")
     
-    for sd in scandata:
-        print("start id : " + repr(sd.getStartIdentifier(2)))
+    #~ for sd in scandata:
+        #~ print("start id : " + repr(sd.getStartIdentifier(2)))

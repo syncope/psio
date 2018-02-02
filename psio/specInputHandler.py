@@ -31,13 +31,18 @@ class SpecInputHandler(inputHandler.InputHandler):
         '''The constructor defines an empty set of member variables.'''
         self._fileList = files
         # abuse the attribute for now -- use as marker for start and end position
-        self._startEnd = attribute
         self._reader = None
         self._currentFile = None
         self._currentData = None
         
-        if(files is not None and path is not None):
+        if(files is not None):
             self._fileIter = iter(files)
+
+    def getAll(self):
+        returnObject = []
+        for f in self._fileList:
+            returnObject += specFileReader.SpecFileReader(f).read()
+        return returnObject
 
     def inputList(self, filenames, path, attribute=None):
         '''Creates the iterator object from the given list of files.
@@ -50,7 +55,6 @@ class SpecInputHandler(inputHandler.InputHandler):
             :type attribute: str'''
         self._fileList = filenames
         self._fileIter = iter(self._fileList)
-        self._attribute = attribute
 
     def __iter__(self):
         '''Implementation of the iterator protocol, part I.'''
@@ -148,4 +152,3 @@ class SpecInputHandler(inputHandler.InputHandler):
         # with spec files there is distinct possibility to contain empty scans
         # so create a dictionary that maps indeces to scanData elements
         self._indexedData = {scan.getScanNumber(): scan for scan in self._currentData}
-    
