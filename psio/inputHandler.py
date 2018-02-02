@@ -57,3 +57,6 @@ class InputHandler():
     def getEntry(self, index):
         '''If case of a multi-image file, the entry at the given index is returned.'''
         pass
+
+    def getAll(self):
+        raise NotImplementedError("[getAll] Method is not available.")
