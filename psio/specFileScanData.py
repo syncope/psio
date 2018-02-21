@@ -24,7 +24,7 @@ class SpecFileScanData():
     def __init__(self):
         self._startline = ''
         self._number = 0
-        self._username = ''
+        self._userdata = []
         self._date = ''
         self._comments = []
         self._customdata = {}
@@ -64,8 +64,8 @@ class SpecFileScanData():
     def setScanNumber(self, number):
         self._number = int(number)
 
-    def setUsername(self, username):
-        self._username = username
+    def addUserData(self, userdata):
+        self._userdata.append(userdata)
 
     def setDate(self, date):
         self._date = date
@@ -98,7 +98,7 @@ class SpecFileScanData():
         print (" values are: ")
         print(self._startline)
         print(self._number)
-        print(self._username)
+        print(self._userdata)
         print(self._date)
         print(self._comments)
         print(self._customdata)
