@@ -60,7 +60,7 @@ class DataHandler():
             print("Error opening the file, bailing out.")
         except TypeError:
             print ("Wrong type for creating a reader, will not work.")
-        return self.fileHandler
+        return
 
     def __next__(self):
         return self.fileHandler.__next__()
@@ -76,3 +76,6 @@ class DataHandler():
 
     def getFileHandler(self):
         return self.fileHandler
+
+    def getAll(self):
+        return self.fileHandler.getAll()

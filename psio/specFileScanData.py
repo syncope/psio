@@ -17,7 +17,7 @@
 # Boston, MA  02110-1301, USA.
 
 
-class ScanData():
+class SpecFileScanData():
     '''This is the atomic data exchange object. It consists of all
        information that is nneded for a scan.'''
     

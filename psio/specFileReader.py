@@ -30,7 +30,7 @@ try:
 except ImportError: # no more StringIO in Python3 -> different module
     from io import StringIO
 
-from psio.scanData import ScanData
+from psio.specFileScanData import SpecFileScanData
 
 class SpecFileReader():
     def __init__(self, fname=None):
