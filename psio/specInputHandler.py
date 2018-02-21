@@ -38,10 +38,10 @@ class SpecInputHandler(inputHandler.InputHandler):
         if(files is not None):
             self._fileIter = iter(files)
 
-    def getAll(self):
+    def getAll(self, scanlist=None):
         returnObject = []
         for f in self._fileList:
-            returnObject += specFileReader.SpecFileReader(f).read()
+            returnObject += specFileReader.SpecFileReader(f).read(scanlist)
         return returnObject
 
     def inputList(self, filenames, path, attribute=None):

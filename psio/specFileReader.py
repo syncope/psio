@@ -36,7 +36,7 @@ class SpecFileReader():
     def __init__(self, fname=None):
         self._fname = fname
         self._rawScanList = []
-        self._scanList = []
+        self._scanList = None
         self._scanDataList = []
         self._file = None
 
@@ -50,11 +50,14 @@ class SpecFileReader():
         except:
             pass
 
-    def read(self, start=None, end=None):
+    def read(self, scanlist=None):
         try:
             self._file = open(self._fname, 'r')
         except(IOError):
             pass # TO BE CHANGED!! 
+
+        # convert the scanlist string to a real list of integers
+        self._scanList = self.convertToList(scanlist)
 
         # start iteration to create individual scan objects
         nextScan = rawScan()
@@ -67,25 +70,37 @@ class SpecFileReader():
                 nextScan.addLine(line)
         if nextScan is not None:
             self._rawScanList.append(nextScan)
-
+        
         # convert the raw objects into scan data
         for rawS in self._rawScanList:
             converted = rawS.convertToScanData()
             if converted is not None:
-                if self.checkValidScanID(converted.getScanNumber(), start, end):
+                if self.checkValidScanID(converted.getScanNumber()):
                     self._scanDataList.append(converted)
         self._file.close()
         return self._scanDataList
 
-    def checkValidScanID(self, scanNumber, start, end):
-        if start is None and end is None:
+    def checkValidScanID(self, scanNumber):
+        if self._scanList is not None:
+            return scanNumber in self._scanList
+        else:
             return True
-        elif start is not None and end is None:
-            return scanNumber >= start
-        elif start is None and end is not None:
-            return scanNumber <= end
-        elif start is not None and end is not None:
-            return (scanNumber >= start) and (scanNumber <= end)
+
+    def convertToList(self, obj):
+        retlist = []
+        li = obj.split(',')
+        for elem in li:
+            try:
+                retlist.append(int(elem))
+            except ValueError:
+                try:
+                    tmp = elem.split('-')
+                    for i in range(int(tmp[0]), int(tmp[1]) +1):
+                        retlist.append(i)
+                except:
+                    pass
+        retlist.sort()
+        return retlist
 
 class rawScan():
     '''Placeholder object for disassembling the spec file'''
@@ -98,13 +113,28 @@ class rawScan():
         self._lines.append(line)
         if line.split(' ')[0][0] != '#':
             self._dataString += line
-    
+
+    def checkFileHeader(self, line):
+        # search for a starting '#F' in the given line
+        words = line.rstrip('\n')
+        splitWords = words.split(' ')
+        keyword = splitWords[0]
+        return keyword == '#F'
+
     def convertToScanData(self):
         '''Create the scanData object from the raw file objects.'''
         # get the different comment fields, as specified
-        sd = ScanData()
+        sd = SpecFileScanData()
         rawKeys = []
         rawValues = []
+        
+        # !!! Workaround: some files contain a file header at the beginning
+        # the keyword is then '#F'
+        # SKIP THIS ATM -- 
+        if(self.checkFileHeader(self._lines[0])):
+            print("found one!")
+            return None
+
         for line in self._lines:
             words = line.rstrip('\n')
             splitWords = words.split(' ')
@@ -112,7 +142,7 @@ class rawScan():
             if keyword == '#S':
                 sd.setStartline(splitWords[1:])
             elif keyword == '#U':
-                sd.setUsername(splitWords[1:])
+                sd.addUserData(splitWords[1:])
             elif keyword == '#D':
                 sd.setDate(splitWords[1:])
             elif keyword == '#C':
@@ -156,7 +186,7 @@ class rawScan():
 
 if __name__ ==  "__main__":
     sfr = SpecFileReader("MnCo15.spc")
-    scandata = sfr.read()
+    scandata = sfr.read("699-740")
     print("there are " + str(len(scandata)) + " elements")
     
     #~ for sd in scandata:
