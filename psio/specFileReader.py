@@ -88,7 +88,10 @@ class SpecFileReader():
 
     def convertToList(self, obj):
         retlist = []
-        li = obj.split(',')
+        try:
+            li = obj.split(',')
+        except AttributeError:
+            return None
         for elem in li:
             try:
                 retlist.append(int(elem))
