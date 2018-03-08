@@ -87,6 +87,9 @@ class SpecFileReader():
             return True
 
     def convertToList(self, obj):
+        if obj is None:
+            return
+        
         retlist = []
         # check for stride mark
         if obj.find(':') != -1:
@@ -195,7 +198,7 @@ class rawScan():
 
 if __name__ ==  "__main__":
     sfr = SpecFileReader("MnCo15.spc")
-    scandata = sfr.read("699-740:12")
+    scandata = sfr.read("699-740")
     print("there are " + str(len(scandata)) + " elements")
     
     #~ for sd in scandata:
