@@ -88,6 +88,12 @@ class SpecFileReader():
 
     def convertToList(self, obj):
         retlist = []
+        # check for stride mark
+        if obj.find(':') != -1:
+            stride = int(obj.split(':')[-1])
+            obj = obj.split(':')[0]
+        else:
+            stride = 1
         try:
             li = obj.split(',')
         except AttributeError:
@@ -98,7 +104,7 @@ class SpecFileReader():
             except ValueError:
                 try:
                     tmp = elem.split('-')
-                    for i in range(int(tmp[0]), int(tmp[1]) +1):
+                    for i in range(int(tmp[0]), int(tmp[1]) +1, stride):
                         retlist.append(i)
                 except:
                     pass
@@ -189,7 +195,7 @@ class rawScan():
 
 if __name__ ==  "__main__":
     sfr = SpecFileReader("MnCo15.spc")
-    scandata = sfr.read("699-740")
+    scandata = sfr.read("699-740:12")
     print("there are " + str(len(scandata)) + " elements")
     
     #~ for sd in scandata:
