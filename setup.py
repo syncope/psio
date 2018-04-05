@@ -46,8 +46,8 @@ setup(
     
     include_package_data=True,
     
-    scripts=['bin/simple_file_viewer.py',
-             'bin/simpleViewerGUI.py'],
+    scripts=['bin/psio-view.py',
+            ],
     
     cmdclass={'build_sphinx': BuildDoc,},
     command_options={
