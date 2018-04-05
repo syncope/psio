@@ -10,11 +10,11 @@ from sphinx.setup_command import BuildDoc
 
 name='psio'
 version='0'
-release='0.1.0'
+release='0.2.0'
 
 setup(
     name='psio',
-    version='0.1.0.dev',
+    version='0.2.0.dev',
 
     description='Module to facilitate access for photon science data in different formats.', 
     long_description=long_description,
