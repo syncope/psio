@@ -16,7 +16,7 @@ setup(
     name='psio',
     version='0.2.0.dev',
 
-    description='Module to facilitate access for photon science data in different formats.', 
+    description='Library to facilitate access for photon science data in different formats; including a viewer.', 
     long_description=long_description,
 
     url='https://github.com/syncope/psio',
