@@ -204,12 +204,3 @@ class rawScan():
         sd.addLabelDict( {i: labels[i] for i in range(noc) } )
 
         return sd
-
-if __name__ ==  "__main__":
-    #~ sfr = SpecFileReader("MnCo15.spc")
-    sfr = SpecFileReader("/home/rosem/workspace/p09_iint/multi_peak_data/cro05_2.spc")
-    scandata = sfr.read("383-471:2")
-    print("there are " + str(len(scandata)) + " elements")
-    
-    #~ for sd in scandata:
-        #~ print("start id : " + repr(sd.getStartIdentifier(2)))
