@@ -54,12 +54,26 @@ class SpecFileScanData():
     def getStartline(self):
         return self._startline
 
+    def getScanCommand(self):
+        return self._startline[1:]
+
+    def getScanType(self):
+        return self._startline[1]
+
     def getStartIdentifier(self, num):
         return self._startline[num]
 
     def setStartline(self, sl):
         self._startline = sl
         self.setScanNumber(int(sl[0]))
+    
+    def getMotorName(self):
+        # highly specific stuff to DESY/PETRA III
+        scantype = self.getScanType()
+        if(scantype == "ascan" or scantype == "dscan"):
+            return self.getStartIdentifier(2)
+        elif (scantype == "hscan"):
+            return "e6cctrl_h"
 
     def setScanNumber(self, number):
         self._number = int(number)
