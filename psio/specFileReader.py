@@ -54,7 +54,8 @@ class SpecFileReader():
         try:
             self._file = open(self._fname, 'r')
         except(IOError):
-            pass # TO BE CHANGED!! 
+            print("[SpecFileReader]:: Can't open the file '" + str(self._fname) + "'. Exiting.")
+            exit(255) 
 
         # convert the scanlist string to a real list of integers
         self._scanList = self.convertToList(scanlist)
@@ -123,7 +124,9 @@ class rawScan():
 
     def addLine(self, line):
         self._lines.append(line)
-        if line.split(' ')[0][0] != '#':
+        if line.split(' ')[0][0] == '@':
+            pass
+        elif line.split(' ')[0][0] != '#':
             self._dataString += line
 
     def checkFileHeader(self, line):
@@ -173,6 +176,12 @@ class rawScan():
                 for w in splitWords[1:]:
                     if w != '':
                         rawValues.append(w)
+            elif keyword[0:2] == "#@":
+                print("Illegal start characters: #@. Skip for now until issue is resolved.")
+                pass
+            elif keyword[0:1] == "@":
+                print("Illegal start character: @. Skip for now until issue is resolved.")
+                pass
 
         sd.addCustomdataDict({rawKeys[i]: rawValues[i] for i in range(len(rawValues))})
 
@@ -189,16 +198,17 @@ class rawScan():
 
         # get the data into numpy arrays
         sio = StringIO(self._dataString)
-        
         multi = np.loadtxt(sio, unpack=True)
+
         sd.addDataDict( {labels[i]: multi[i] for i in range(noc) } )
         sd.addLabelDict( {i: labels[i] for i in range(noc) } )
 
         return sd
 
 if __name__ ==  "__main__":
-    sfr = SpecFileReader("MnCo15.spc")
-    scandata = sfr.read("699-740")
+    #~ sfr = SpecFileReader("MnCo15.spc")
+    sfr = SpecFileReader("/home/rosem/workspace/p09_iint/multi_peak_data/cro05_2.spc")
+    scandata = sfr.read("383-471:2")
     print("there are " + str(len(scandata)) + " elements")
     
     #~ for sd in scandata:
