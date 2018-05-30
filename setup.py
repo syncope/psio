@@ -14,7 +14,7 @@ release='0.2.0'
 
 setup(
     name='psio',
-    version='0.2.0.dev',
+    version='0.2.0',
 
     description='Library to facilitate access for photon science data in different formats; including a viewer.', 
     long_description=long_description,
@@ -46,8 +46,6 @@ setup(
     
     include_package_data=True,
     
-    scripts=['bin/psio-view.py',
-            ],
     
     cmdclass={'build_sphinx': BuildDoc,},
     command_options={
