@@ -25,3 +25,5 @@ except ImportError("pyqtgraph is not installed. No display will be available."):
 
 from .dataHandler import DataHandler
 from .hdf5Output import HDF5Output
+
+__version__ = "0.2.0"
