@@ -32,6 +32,8 @@ except ImportError: # no more StringIO in Python3 -> different module
 
 from psio.specFileScanData import SpecFileScanData
 
+
+
 class SpecFileReader():
     def __init__(self, fname=None):
         self._fname = fname
@@ -92,28 +94,34 @@ class SpecFileReader():
             return
         
         retlist = []
-        # check for stride mark
-        if obj.find(':') != -1:
-            stride = int(obj.split(':')[-1])
-            obj = obj.split(':')[0]
-        else:
-            stride = 1
+        # first divide into elements from comma-separated list
         try:
-            li = obj.split(',')
+            elements = obj.split(',')
         except AttributeError:
             return None
-        for elem in li:
-            try:
-                retlist.append(int(elem))
-            except ValueError:
-                try:
-                    tmp = elem.split('-')
-                    for i in range(int(tmp[0]), int(tmp[1]) +1, stride):
+    
+        # iterate over elements: either range (with or without stride) and single values
+        for element in elements:
+            
+            #  check for stride mark
+            if element.find(':') != -1:
+                elementstride = int(element.split(':')[-1])
+                elem = element.split(':')[0]
+                tmp = elem.split('-')
+                for i in range(int(tmp[0]), int(tmp[1]) +1, elementstride):
+                    retlist.append(i)
+            else:
+                tmp = element.split('-')
+                if( len(tmp) == 2):
+                    for i in range(int(tmp[0]), int(tmp[1]) +1):
                         retlist.append(i)
-                except:
-                    pass
+                else:
+                    retlist.append(int(tmp))
+    
         retlist.sort()
         return retlist
+
+
 
 class rawScan():
     '''Placeholder object for disassembling the spec file'''
