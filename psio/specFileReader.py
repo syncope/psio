@@ -102,7 +102,6 @@ class SpecFileReader():
     
         # iterate over elements: either range (with or without stride) and single values
         for element in elements:
-            
             #  check for stride mark
             if element.find(':') != -1:
                 elementstride = int(element.split(':')[-1])
@@ -116,7 +115,11 @@ class SpecFileReader():
                     for i in range(int(tmp[0]), int(tmp[1]) +1):
                         retlist.append(i)
                 else:
-                    retlist.append(int(tmp))
+                    # if there is no split, then the elements will be lists!
+                    if(len(tmp) != 1):
+                        print("Error in preparing the input selection of spec file scan lists.")
+                    else:
+                        retlist.append(int(tmp[0]))
     
         retlist.sort()
         return retlist
