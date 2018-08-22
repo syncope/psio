@@ -1,8 +1,10 @@
 psio (0.2.2-2+deb8u10~fsec) jessie; urgency=low
 
-  * Added wrong dependency in python3 version.
+  * patch:  Added wrong dependency in python3 version
+     before: python2 version of future. now correct: python3-future.
 
  -- Christoph Roseamnn <christoph.rosemann@desy.de>  Wed, 22 Aug 2018 17:10:00 +0200
+
 
 
 psio (0.2.2-1+deb8u10~fsec) jessie; urgency=low
@@ -18,6 +20,3 @@ psio (0.2.0-1+deb8u10~fsec) jessie; urgency=low
   * Initial release
 
  -- Johannes Blume <johannes.blume@desy.de>  Thu, 31 May 2018 09:47:00 +0200
-
-
-
