@@ -20,7 +20,7 @@
 class SpecFileScanData():
     '''This is the atomic data exchange object. It consists of all
        information that is nneded for a scan.'''
-    
+
     def __init__(self):
         self._startline = ''
         self._number = 0
@@ -66,7 +66,7 @@ class SpecFileScanData():
     def setStartline(self, sl):
         self._startline = sl
         self.setScanNumber(int(sl[0]))
-    
+
     def getMotorName(self):
         # highly specific stuff to DESY/PETRA III
         scantype = self.getScanType()
@@ -83,7 +83,7 @@ class SpecFileScanData():
 
     def setDate(self, date):
         self._date = date
-    
+
     def addComment(self, comment):
         self._comments.extend(comment)
 
@@ -97,14 +97,14 @@ class SpecFileScanData():
         self._labels.append(label)
 
     def addDataDict(self, dic):
-        self._dataDict = dic 
+        self._dataDict = dic
 
     def addLabelDict(self, dic):
         self._labelDict = dic 
 
     def checkSanity(self):
         '''Tests whether the minimal requirements are met.'''
-        if ( self._noc is not len(self._labels)):
+        if (self._noc is not len(self._labels)):
             return False
         return (self._startline and self._labels and self._noc)
 

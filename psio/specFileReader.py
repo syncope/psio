@@ -20,18 +20,19 @@
 # general idea:
 # a) read in the file, decompose into individual scans:
 #    !!! the separation is asserted to be a blank line !!!
-# b) create a list of raw scan objects 
+# b) create a list of raw scan objects
 # c) convert the raw objects into scan data objects
 
 
 import numpy as np
 try:
-    from cStringIO import StringIO # StringIO behaves like a file object
-except ImportError: # no more StringIO in Python3 -> different module
+    # StringIO behaves like a file object
+    from cStringIO import StringIO
+except ImportError:
+    # no more StringIO in Python3 -> different module
     from io import StringIO
 
 from psio.specFileScanData import SpecFileScanData
-
 
 
 class SpecFileReader():
@@ -57,7 +58,7 @@ class SpecFileReader():
             self._file = open(self._fname, 'r')
         except(IOError):
             print("[SpecFileReader]:: Can't open the file '" + str(self._fname) + "'. Exiting.")
-            exit(255) 
+            exit(255)
 
         # convert the scanlist string to a real list of integers
         self._scanList = self.convertToList(scanlist)
@@ -73,7 +74,7 @@ class SpecFileReader():
                 nextScan.addLine(line)
         if nextScan is not None:
             self._rawScanList.append(nextScan)
-        
+
         # convert the raw objects into scan data
         for rawS in self._rawScanList:
             converted = rawS.convertToScanData()
@@ -92,14 +93,14 @@ class SpecFileReader():
     def convertToList(self, obj):
         if obj is None:
             return
-        
+
         retlist = []
         # first divide into elements from comma-separated list
         try:
             elements = obj.split(',')
         except AttributeError:
             return None
-    
+
         # iterate over elements: either range (with or without stride) and single values
         for element in elements:
             #  check for stride mark
@@ -107,12 +108,12 @@ class SpecFileReader():
                 elementstride = int(element.split(':')[-1])
                 elem = element.split(':')[0]
                 tmp = elem.split('-')
-                for i in range(int(tmp[0]), int(tmp[1]) +1, elementstride):
+                for i in range(int(tmp[0]), int(tmp[1]) + 1, elementstride):
                     retlist.append(i)
             else:
                 tmp = element.split('-')
-                if( len(tmp) == 2):
-                    for i in range(int(tmp[0]), int(tmp[1]) +1):
+                if(len(tmp) == 2):
+                    for i in range(int(tmp[0]), int(tmp[1]) + 1):
                         retlist.append(i)
                 else:
                     # if there is no split, then the elements will be lists!
@@ -120,10 +121,9 @@ class SpecFileReader():
                         print("Error in preparing the input selection of spec file scan lists.")
                     else:
                         retlist.append(int(tmp[0]))
-    
+
         retlist.sort()
         return retlist
-
 
 
 class rawScan():
@@ -153,10 +153,10 @@ class rawScan():
         sd = SpecFileScanData()
         rawKeys = []
         rawValues = []
-        
+
         # !!! Workaround: some files contain a file header at the beginning
         # the keyword is then '#F'
-        # SKIP THIS ATM -- 
+        # SKIP THIS ATM --
         if(self.checkFileHeader(self._lines[0])):
             print("found one!")
             return None
@@ -199,19 +199,19 @@ class rawScan():
         # check if everything is there
         if not sd.checkSanity():
             return
-            
+
         labels = sd.getLabels()
         noc = sd.getNumberOfColumns()
-        
+
         if(self._dataString == ''):
-            #~ logger.info("[SpecFileReader] No data to read in scan number " + str(sd.getScanNumber()))
+            # logger.info("[SpecFileReader] No data to read in scan number " + str(sd.getScanNumber()))
             return None
 
         # get the data into numpy arrays
         sio = StringIO(self._dataString)
         multi = np.loadtxt(sio, unpack=True)
 
-        sd.addDataDict( {labels[i]: multi[i] for i in range(noc) } )
-        sd.addLabelDict( {i: labels[i] for i in range(noc) } )
+        sd.addDataDict({labels[i]: multi[i] for i in range(noc)})
+        sd.addLabelDict({i: labels[i] for i in range(noc)})
 
         return sd
