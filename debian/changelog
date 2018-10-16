@@ -1,22 +1,5 @@
-psio (0.2.2-2+deb8u10~fsec) jessie; urgency=low
+psio (0.2.2-2+deb9u5~fsec) stretch; urgency=low
 
-  * patch:  Added wrong dependency in python3 version
-     before: python2 version of future. now correct: python3-future.
+  * first version for Debian9
 
- -- Christoph Roseamnn <christoph.rosemann@desy.de>  Wed, 22 Aug 2018 17:10:00 +0200
-
-
-
-psio (0.2.2-1+deb8u10~fsec) jessie; urgency=low
-
-  * Minor bug fixes; 0.2.2 remedies a configuration error for reading spec files
-
- -- Christoph Roseamnn <christoph.rosemann@desy.de>  Wed, 22 Aug 2018 15:57:00 +0200
-
-
-
-psio (0.2.0-1+deb8u10~fsec) jessie; urgency=low
-
-  * Initial release
-
- -- Johannes Blume <johannes.blume@desy.de>  Thu, 31 May 2018 09:47:00 +0200
+ -- Christoph Roseamnn <christoph.rosemann@desy.de>  Tue, 16 Oct 2018 16:32:00 +0200
