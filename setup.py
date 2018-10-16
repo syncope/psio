@@ -8,13 +8,13 @@ with open(path.join('.', 'README.rst'), encoding='utf-8') as f:
 
 from sphinx.setup_command import BuildDoc
 
-name='psio'
-version='0'
-release='0.2.2'
+name  = 'psio'
+version='0.2'
+release='0.2.3'
 
 setup(
-    name='psio',
-    version='0.2.2',
+    name=name,
+    version=release,
 
     description='Library to facilitate access for photon science data in different formats; including a viewer.', 
     long_description=long_description,

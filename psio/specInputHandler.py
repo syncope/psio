@@ -34,7 +34,7 @@ class SpecInputHandler(inputHandler.InputHandler):
         self._reader = None
         self._currentFile = None
         self._currentData = None
-        
+
         if(files is not None):
             self._fileIter = iter(files)
 
