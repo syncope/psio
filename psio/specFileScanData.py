@@ -72,6 +72,8 @@ class SpecFileScanData():
         scantype = self.getScanType()
         if(scantype == "ascan" or scantype == "dscan"):
             return self.getStartIdentifier(2)
+        elif(scantype == "d2scan"):
+            return self.getStartIdentifier(2)
         elif (scantype == "hscan"):
             return "e6cctrl_h"
 
