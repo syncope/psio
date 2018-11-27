@@ -196,7 +196,7 @@ class rawScan():
                 #~ print("Illegal start characters: #@. Skip for now until issue is resolved.")
                 #~ pass
             elif keyword[0:2] == "@A":
-                sd.addMCA(np.asarray(splitWords[1:]))
+                sd.addMCA(np.asarray(splitWords[1:-1], dtype=float))
 
         sd.addCustomdataDict({rawKeys[i]: rawValues[i] for i in range(len(rawValues))})
 
