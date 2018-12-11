@@ -1,6 +1,7 @@
 psio (0.2.4-1+deb9u5~fsec) stretch; urgency=low
 
   * Addition of 'd2scan' scan types in spec files.
+    Plus: reading of MCA data, including API (limited to a single MCA!).
 
  -- Christoph Roseamnn <christoph.rosemann@desy.de>  Wed, 21 Nov 2018 11:35:00 +0200
 
