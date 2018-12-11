@@ -32,6 +32,8 @@ class SpecFileScanData():
         self._labels = []
         self._dataDict = {}
         self._labelDict = {}
+        self._mcaname = ''
+        self._mca = []
 
     def getScanNumber(self):
         return self._number
@@ -77,6 +79,12 @@ class SpecFileScanData():
         elif (scantype == "hscan"):
             return "e6cctrl_h"
 
+    def getMCA(self):
+        return self._mca
+
+    def getMCAName(self):
+        return self._mcaname
+
     def setScanNumber(self, number):
         self._number = int(number)
 
@@ -104,13 +112,19 @@ class SpecFileScanData():
     def addLabelDict(self, dic):
         self._labelDict = dic 
 
+    def addMCA(self, data):
+        self._mca.append(data)
+
+    def setMCAName(self, name):
+        self._mcaname = name
+
     def checkSanity(self):
         '''Tests whether the minimal requirements are met.'''
         if (self._noc is not len(self._labels)):
             return False
         return (self._startline and self._labels and self._noc)
 
-    def dump(self):
+    def info(self):
         print (" values are: ")
         print(self._startline)
         print(self._number)
@@ -121,3 +135,5 @@ class SpecFileScanData():
         print(self._noc)
         print(self._labels)
         print(self._dataDict)
+        print(self._mcaname)
+        print(str(self._mca))

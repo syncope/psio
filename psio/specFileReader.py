@@ -187,12 +187,16 @@ class rawScan():
                 for w in splitWords[1:]:
                     if w != '':
                         rawValues.append(w)
-            elif keyword[0:2] == "#@":
-                print("Illegal start characters: #@. Skip for now until issue is resolved.")
-                pass
-            elif keyword[0:1] == "@":
-                print("Illegal start character: @. Skip for now until issue is resolved.")
-                pass
+            elif keyword[0:8] == "#@MCA_NB":
+                if( splitWords[1] != "1"):
+                    print("In reading MCA data more than one detector is present.")
+            elif keyword[0:7] == "#@DET_0":
+                sd.setMCAName(splitWords[1])
+            #~ elif keyword[0:2] == "#@":
+                #~ print("Illegal start characters: #@. Skip for now until issue is resolved.")
+                #~ pass
+            elif keyword[0:2] == "@A":
+                sd.addMCA(np.asarray(splitWords[1:-1], dtype=float))
 
         sd.addCustomdataDict({rawKeys[i]: rawValues[i] for i in range(len(rawValues))})
 

@@ -10,7 +10,7 @@ from sphinx.setup_command import BuildDoc
 
 name  = 'psio'
 version='0.2'
-release='0.2.4'
+release='0.2.5'
 
 setup(
     name=name,
