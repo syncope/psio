@@ -32,6 +32,7 @@ class AsciiFileScanData():
         self._dataDict = {}
         self._labelDict = {}
         self._mcaname = ''
+        self._scancommand = ''
         self._mca = []
 
     def getScanNumber(self):
@@ -56,10 +57,15 @@ class AsciiFileScanData():
         return self._startline
 
     def getScanCommand(self):
-        return self._startline[1:]
+        if self._scancommand == '':
+            self._scancommand = self._startline[1:]
+        return self._scancommand
 
     def getScanType(self):
-        return self._startline[1]
+        if self._scancommand == '':
+            return self._startline[1:]
+        else:
+            return self._scancommand.split(' ')[0]
 
     def getStartIdentifier(self, num):
         return self._startline[num]
@@ -72,9 +78,9 @@ class AsciiFileScanData():
         # highly specific stuff to DESY/PETRA III
         scantype = self.getScanType()
         if(scantype == "ascan" or scantype == "dscan"):
-            return self.getStartIdentifier(2)
+            return self._scancommand.split(' ')[1]
         elif(scantype == "d2scan"):
-            return self.getStartIdentifier(2)
+            return self._scancommand.split(' ')[1]
         elif (scantype == "hscan"):
             return "e6cctrl_h"
 
@@ -95,6 +101,9 @@ class AsciiFileScanData():
 
     def addComment(self, comment):
         self._comments.extend(comment)
+
+    def setScanCommand(self, sc):
+        self._scancommand = sc
 
     def addCustomdataDict(self, dic):
         self._customdata = dic
