@@ -24,11 +24,11 @@ from . import fioFileReader
 from . import inputHandler
 
 
-class fioInputHandler(inputHandler.InputHandler):
+class FioInputHandler(inputHandler.InputHandler):
 
     '''This is the implementation of the InputHandler for FIO files.'''
 
-    def __init__(self):
+    def __init__(self, files=None, path=None, attribute=None):
         '''The constructor defines an empty set of member variables.'''
         self._fileList = files
         # abuse the attribute for now -- use as marker for start and end position
@@ -103,11 +103,15 @@ class fioInputHandler(inputHandler.InputHandler):
 
         if(self._currentFile is None):
             self.advanceFile()
-            self.indexData()
-        try:
-            return self._indexedData[entrynumber]
-        except KeyError:
-            raise KeyError("[FioInputHandler::FioFileReader::getEntry] Entry of index " + repr(entrynumber) + " does not exist.")
+        while(1):
+            try:
+                if self._currentData.getScanNumber() == entrynumber:
+                    return self._currentData
+                else:
+                    self.advanceFile()
+            except StopIteration:
+                print("Entry " + str(entrynumber) + " is not present in the given list.")
+                return
 
     def advanceFile(self):
         # advance the file iterator
@@ -126,20 +130,17 @@ class fioInputHandler(inputHandler.InputHandler):
         self._currentData = self._currentFile.read()
 
         try:
-            self._nentries = len(self._currentData)
+            # FIO files are single entry files
+            # so number of entries is the same as number of files
+            self._nentries = len(self._fileList)
 
         # create an iterator for the elements
         except(AttributeError):
             self._nentries = -1
-        self._dataIter = iter(self._currentData)
+        self._dataIter = iter(self._fileList)
 
-    def indexData(self):
-        # with spec files there is distinct possibility to contain empty scans
-        # so create a dictionary that maps indeces to scanData elements
-        self._indexedData = {scan.getScanNumber(): scan for scan in self._currentData}
-
-    def getAll(self, scanlist=None):
+    def getAll(self):
         returnObject = []
         for f in self._fileList:
-            returnObject += fioFileReader.fioFileReader(f).read(scanlist)
+            returnObject.append(fioFileReader.FioFileReader(f).read())
         return returnObject
