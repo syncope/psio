@@ -30,7 +30,6 @@ class AsciiFileScanData():
         self._noc = 0
         self._labels = []
         self._dataDict = {}
-        self._labelDict = {}
         self._mcaname = ''
         self._scancommand = ''
         self._mca = []
@@ -116,9 +115,6 @@ class AsciiFileScanData():
 
     def addDataDict(self, dic):
         self._dataDict = dic
-
-    def addLabelDict(self, dic):
-        self._labelDict = dic 
 
     def addMCA(self, data):
         self._mca.append(data)

@@ -100,9 +100,17 @@ class FioFileReader():
         self._scandata.addCustomdataDict({rawKeys[i]: rawValues[i] for i in range(len(rawValues))})
 
     def _getData(self, dlist):
-        pass
-        # Col 1 del DOUBLE
-
+        tmplabels = []
+        tmptmpdata = []
+        for elem in dlist:
+            e = elem.strip()
+            if "Col" in e:
+                cs = e.split(" ")
+                tmplabels.append(str(cs[2]))
+            else:
+                tmptmpdata.append(elem)
+        tmpdata = np.loadtxt(tmptmpdata)
+        self._scandata.addDataDict({tmplabels[i]: tmpdata[i] for i in range(len(tmplabels))})
 
 
 class rawScan():
