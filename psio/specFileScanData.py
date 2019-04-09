@@ -31,7 +31,6 @@ class SpecFileScanData():
         self._noc = 0
         self._labels = []
         self._dataDict = {}
-        self._labelDict = {}
         self._mcaname = ''
         self._mca = []
 
@@ -108,9 +107,6 @@ class SpecFileScanData():
 
     def addDataDict(self, dic):
         self._dataDict = dic
-
-    def addLabelDict(self, dic):
-        self._labelDict = dic 
 
     def addMCA(self, data):
         self._mca.append(data)
