@@ -1,4 +1,4 @@
-# Copyright (C) 2017  Christoph Rosemann, DESY, Notkestr. 85, D-22607 Hamburg
+# Copyright (C) 2019  Christoph Rosemann, DESY, Notkestr. 85, D-22607 Hamburg
 # email contact: christoph.rosemann@desy.de
 #
 # This program is free software; you can redistribute it and/or
@@ -17,9 +17,8 @@
 # Boston, MA  02110-1301, USA.
 
 
-class SpecFileScanData():
-    '''This is the atomic data exchange object. It consists of all
-       information that is nneded for a scan.'''
+class AsciiFileScanData():
+    '''Base class for exchange data objects read from ACII files.'''
 
     def __init__(self):
         self._startline = ''
@@ -32,6 +31,7 @@ class SpecFileScanData():
         self._labels = []
         self._dataDict = {}
         self._mcaname = ''
+        self._scancommand = ''
         self._mca = []
 
     def getScanNumber(self):
@@ -56,10 +56,15 @@ class SpecFileScanData():
         return self._startline
 
     def getScanCommand(self):
-        return self._startline[1:]
+        if self._scancommand == '':
+            self._scancommand = self._startline[1:]
+        return self._scancommand
 
     def getScanType(self):
-        return self._startline[1]
+        if self._scancommand == '':
+            return self._startline[1:]
+        else:
+            return self._scancommand.split(' ')[0]
 
     def getStartIdentifier(self, num):
         return self._startline[num]
@@ -72,9 +77,9 @@ class SpecFileScanData():
         # highly specific stuff to DESY/PETRA III
         scantype = self.getScanType()
         if(scantype == "ascan" or scantype == "dscan"):
-            return self.getStartIdentifier(2)
+            return self._scancommand.split(' ')[1]
         elif(scantype == "d2scan"):
-            return self.getStartIdentifier(2)
+            return self._scancommand.split(' ')[1]
         elif (scantype == "hscan"):
             return "e6cctrl_h"
 
@@ -95,6 +100,9 @@ class SpecFileScanData():
 
     def addComment(self, comment):
         self._comments.extend(comment)
+
+    def setScanCommand(self, sc):
+        self._scancommand = sc
 
     def addCustomdataDict(self, dic):
         self._customdata = dic
@@ -121,7 +129,7 @@ class SpecFileScanData():
         return (self._startline and self._labels and self._noc)
 
     def info(self):
-        print ("[SpecFileScanData] Values are: ")
+        print ("[AsciiFileScanData] Values are: ")
         print(self._startline)
         print(self._number)
         print(self._userdata)

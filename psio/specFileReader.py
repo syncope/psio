@@ -216,6 +216,4 @@ class rawScan():
         multi = np.loadtxt(sio, unpack=True)
 
         sd.addDataDict({labels[i]: multi[i] for i in range(noc)})
-        sd.addLabelDict({i: labels[i] for i in range(noc)})
-
         return sd

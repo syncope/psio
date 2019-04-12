@@ -1,4 +1,4 @@
-# Copyright (C) 2016 Christoph Rosemann, DESY, Notkestr. 85, D-22607 Hamburg
+# Copyright (C) 2016-9 Christoph Rosemann, DESY, Notkestr. 85, D-22607 Hamburg
 # email contact: christoph.rosemann@desy.de
 #
 # This program is free software; you can redistribute it and/or
@@ -22,6 +22,7 @@
 from . import fabioInputHandler
 from . import h5InputHandler
 from . import specInputHandler
+from . import fioInputHandler
 
 
 class InputHandlerFactory():
@@ -50,6 +51,8 @@ class InputHandlerFactory():
             return h5InputHandler.H5InputHandler()
         elif (handlertype == "spec"):
             return specInputHandler.SpecInputHandler()
+        elif (handlertype == "fio"):
+            return fioInputHandler.FioInputHandler()
         else:
             raise TypeError("Unrecognized IOHandler type.\
             Please chose an existing implementation.")
@@ -64,5 +67,7 @@ class InputHandlerFactory():
             return "h5"
         elif(typehint == "spec"):
             return "spec"            
+        elif(typehint == "fio"):
+            return "fio"            
         else:
             return "unknown"
