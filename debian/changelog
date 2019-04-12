@@ -1,3 +1,15 @@
+psio (0.2.6-1+deb9u5~fsec) stretch; urgency=low
+
+  * Implementation of fio file reader plus new data type for that.
+
+ -- Christoph Roseamnn <christoph.rosemann@desy.de>  Fri, 12 Apr 2019 19:29:00 +0100
+
+psio (0.2.5-1+deb9u5~fsec) stretch; urgency=low
+
+  * Reading of MCA data, including API (limited to a single MCA!).
+
+ -- Christoph Roseamnn <christoph.rosemann@desy.de>  Tue, 11 Dec 2018 17:53:00 +0100
+
 psio (0.2.4-1+deb9u5~fsec) stretch; urgency=low
 
   * Addition of 'd2scan' scan types in spec files.
