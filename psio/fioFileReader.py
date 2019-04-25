@@ -110,5 +110,10 @@ class FioFileReader():
                 self._scandata.addLabel(str(cs[2]))
             else:
                 tmptmpdata.append(elem)
-        tmpdata = np.loadtxt(tmptmpdata, unpack=True)
+        # add "Pt_No" to fio data, not originally there
+        tmplabels.insert(0, "Pt_No")
+        li = []
+        for i, el in enumerate(tmptmpdata):
+          li.append(str(i) + str(el))
+        tmpdata = np.loadtxt(li, unpack=True)
         self._scandata.addDataDict({tmplabels[i]: tmpdata[i] for i in range(len(tmplabels))})
