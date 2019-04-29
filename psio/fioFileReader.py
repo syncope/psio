@@ -102,6 +102,7 @@ class FioFileReader():
     def _getData(self, dlist):
         tmplabels = []
         tmptmpdata = []
+        self._scandata.addLabel("Pt_No")
         for elem in dlist:
             e = elem.strip()
             if "Col" in e:
