@@ -25,6 +25,7 @@
 
 
 from . import inputHandlerFactory
+from . import psioException
 
 
 class DataHandler():

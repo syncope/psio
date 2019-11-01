@@ -33,7 +33,7 @@ except ImportError:
     from io import StringIO
 
 from psio.specFileScanData import SpecFileScanData
-
+from . import psioException
 
 class SpecFileReader():
     def __init__(self, fname=None):
@@ -58,7 +58,7 @@ class SpecFileReader():
             self._file = open(self._fname, 'r')
         except(IOError):
             print("[SpecFileReader]:: Can't open the file '" + str(self._fname) + "'. Exiting.")
-            exit(255)
+            raise psioException.PSIONoFileException()
 
         # convert the scanlist string to a real list of integers
         self._scanList = self.convertToList(scanlist)
