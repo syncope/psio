@@ -18,10 +18,10 @@
 
 # these are exception thrown by PSIO, to be caught from the user
 
+
 class PSIOException(Exception):
     """Base class for exceptions in this module."""
     pass
-
 
 
 class PSIONoFileException(PSIOException):

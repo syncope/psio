@@ -35,6 +35,7 @@ except ImportError:
 from psio.specFileScanData import SpecFileScanData
 from . import psioException
 
+
 class SpecFileReader():
     def __init__(self, fname=None):
         self._fname = fname
@@ -188,13 +189,10 @@ class rawScan():
                     if w != '':
                         rawValues.append(w)
             elif keyword[0:8] == "#@MCA_NB":
-                if( splitWords[1] != "1"):
+                if(splitWords[1] != "1"):
                     print("In reading MCA data more than one detector is present.")
             elif keyword[0:7] == "#@DET_0":
                 sd.setMCAName(splitWords[1])
-            #~ elif keyword[0:2] == "#@":
-                #~ print("Illegal start characters: #@. Skip for now until issue is resolved.")
-                #~ pass
             elif keyword[0:2] == "@A":
                 sd.addMCA(np.asarray(splitWords[1:-1], dtype=float))
 

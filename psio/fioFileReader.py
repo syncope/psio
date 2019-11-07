@@ -20,7 +20,6 @@
 '''fioFileReader implementation for Python3 and v2.'''
 
 
-
 import numpy as np
 try:
     # StringIO behaves like a file object
@@ -94,7 +93,7 @@ class FioFileReader():
         rawKeys = []
         rawValues = []
         for element in plist:
-            param = element.split( "=")
+            param = element.split("=")
             rawKeys.append(param[0].strip())
             rawValues.append(param[1].strip())
         self._scandata.addCustomdataDict({rawKeys[i]: rawValues[i] for i in range(len(rawValues))})
@@ -115,6 +114,6 @@ class FioFileReader():
         tmplabels.insert(0, "Pt_No")
         li = []
         for i, el in enumerate(tmptmpdata):
-          li.append(str(i) + str(el))
+            li.append(str(i) + str(el))
         tmpdata = np.loadtxt(li, unpack=True)
         self._scandata.addDataDict({tmplabels[i]: tmpdata[i] for i in range(len(tmplabels))})

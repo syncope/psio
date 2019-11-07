@@ -85,7 +85,7 @@ class FioInputHandler(inputHandler.InputHandler):
             '''Specific syntax for Python2.x since the call syntax of the iterator is different.'''
 
             return self.__next__()
- 
+
     def getTotalNumberOfEntries(self):
         '''Helper function to obtain the number of elements to be processed.
 
@@ -116,7 +116,7 @@ class FioInputHandler(inputHandler.InputHandler):
     def advanceFile(self):
         # advance the file iterator
         self._nextFile()
-    
+
     def _nextFile(self):
         '''Helper function to navigate through a list of files.'''
 
