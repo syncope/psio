@@ -42,7 +42,7 @@ class FioFileReader():
 
     def close(self):
         try:
-            if(self._file.closed):
+            if(not self._file.closed):
                 self._file.close()
         except:
             pass
@@ -73,6 +73,7 @@ class FioFileReader():
         self._getComments(rawdict['comment'])
         self._getParameters(rawdict['param'])
         self._getData(rawdict['data'])
+        self.close()
         return self._scandata
 
     def _getScanNumber(self):

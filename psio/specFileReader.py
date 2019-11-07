@@ -49,7 +49,7 @@ class SpecFileReader():
 
     def close(self):
         try:
-            if(self._file.closed):
+            if(not self._file.closed):
                 self._file.close()
         except:
             pass
