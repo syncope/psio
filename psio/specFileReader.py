@@ -55,6 +55,9 @@ class SpecFileReader():
             pass
 
     def read(self, scanlist=None):
+        with open(self._fname, 'r') as f:
+            self.checkIntegrity(f.readline())
+
         try:
             self._file = open(self._fname, 'r')
         except(IOError):
@@ -125,6 +128,13 @@ class SpecFileReader():
 
         retlist.sort()
         return retlist
+
+    def checkIntegrity(self, firstline):
+        words = firstline.rstrip('\n')
+        splitWords = words.split(' ')
+        keyword = splitWords[0]
+        if keyword != "#S":
+            raise psioException.PSIOSPECFileException()
 
 
 class rawScan():
