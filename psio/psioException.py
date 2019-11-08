@@ -27,3 +27,13 @@ class PSIOException(Exception):
 class PSIONoFileException(PSIOException):
     '''Exception raised when no file can be found or opened.'''
     pass
+
+
+class PSIOSPECFileException(PSIOException):
+    '''Spec file doesn't match the specification.'''
+    pass
+
+
+class PSIOFIOFileException(PSIOException):
+    '''FIO file doesn't match the specification.'''
+    pass
