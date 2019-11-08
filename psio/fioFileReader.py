@@ -28,6 +28,7 @@ except ImportError:
     # no more StringIO in Python3 -> different module
     from io import StringIO
 
+from . import psioException
 from psio.asciiFileScanData import AsciiFileScanData
 
 
@@ -48,11 +49,8 @@ class FioFileReader():
             pass
 
     def read(self):
-        try:
-            self._file = open(self._fname, 'r')
-        except(IOError):
-            print("[FioFileReader]:: Can't open the file '" + str(self._fname) + "'. Exiting.")
-            exit(255)
+        self.checkIntegrity()
+        self._file = open(self._fname, 'r')
         rawdict = {'comment': [], 'param': [], 'data': []}
         mode = ''
         for line in self._file.readlines():
@@ -69,6 +67,7 @@ class FioFileReader():
                 continue
             if mode is not '':
                 rawdict[mode].append(line)
+
         self._getScanNumber()
         self._getComments(rawdict['comment'])
         self._getParameters(rawdict['param'])
@@ -118,3 +117,24 @@ class FioFileReader():
             li.append(str(i) + str(el))
         tmpdata = np.loadtxt(li, unpack=True)
         self._scandata.addDataDict({tmplabels[i]: tmpdata[i] for i in range(len(tmplabels))})
+
+    def checkIntegrity(self):
+        try:
+            self._file = open(self._fname, 'r')
+        except(IOError):
+            print("[FioFileReader]:: Can't open the file '" + str(self._fname) + "'. Exiting.")
+            raise psioException.PSIONoFileException()
+        count = {'comment': 0, 'param': 0, 'data': 0}
+        mode = ''
+        for line in self._file.readlines():
+            if line.find('%c') == 0:
+                mode = 'comment'
+            elif line.find('%p') == 0:
+                mode = 'param'
+            elif line.find('%d') == 0:
+                mode = 'data'
+            if mode == 'comment' or mode == 'param' or mode == 'data':
+                count[mode] += 1
+        if count['data'] is 0 or count['comment'] is 0:
+            raise psioException.PSIOFIOFileException()
+        self._file.close()
