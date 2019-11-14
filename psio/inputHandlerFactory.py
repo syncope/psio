@@ -66,8 +66,8 @@ class InputHandlerFactory():
         elif(path is not None):
             return "h5"
         elif(typehint == "spec"):
-            return "spec"            
+            return "spec"
         elif(typehint == "fio"):
-            return "fio"            
+            return "fio"
         else:
             return "unknown"

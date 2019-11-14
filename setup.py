@@ -1,32 +1,31 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 from codecs import open
 from os import path
+from sphinx.setup_command import BuildDoc
 
 with open(path.join('.', 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
-from sphinx.setup_command import BuildDoc
-
-name  = 'psio'
-version='0.2'
-release='0.2.7'
+name = 'psio'
+version = '0.2'
+release = '0.2.8'
 
 setup(
     name=name,
     version=release,
 
-    description='Library to facilitate access for photon science data in different formats; including a viewer.', 
+    description='Library to facilitate access for photon science data in different formats; including a viewer.',
     long_description=long_description,
 
     url='https://github.com/syncope/psio',
 
     author='Ch.Rosemann',
     author_email='christoph.rosemann@desy.de',
-    
+
     license='GPLv2',
-    
-    classifiers = [
+
+    classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Physics',
@@ -39,19 +38,17 @@ setup(
     ],
 
     keywords='photon science file input output',
-    
-    packages=['psio',],
-    
-    package_dir = { 'psio':'psio',},
-    
+
+    packages=['psio', ],
+
+    package_dir={'psio': 'psio', },
+
     include_package_data=True,
-    
-    
-    cmdclass={'build_sphinx': BuildDoc,},
+
+    cmdclass={'build_sphinx': BuildDoc, },
     command_options={
         'build_sphinx': {
             'project': ('setup.py', name),
             'version': ('setup.py', version),
             'release': ('setup.py', release)}},
 )
-

@@ -33,6 +33,7 @@ except ImportError:
     from io import StringIO
 
 from psio.specFileScanData import SpecFileScanData
+from . import psioException
 
 
 class SpecFileReader():
@@ -48,17 +49,20 @@ class SpecFileReader():
 
     def close(self):
         try:
-            if(self._file.closed):
+            if(not self._file.closed):
                 self._file.close()
         except:
             pass
 
     def read(self, scanlist=None):
+        with open(self._fname, 'r') as f:
+            self.checkIntegrity(f.readline())
+
         try:
             self._file = open(self._fname, 'r')
         except(IOError):
             print("[SpecFileReader]:: Can't open the file '" + str(self._fname) + "'. Exiting.")
-            exit(255)
+            raise psioException.PSIONoFileException()
 
         # convert the scanlist string to a real list of integers
         self._scanList = self.convertToList(scanlist)
@@ -125,6 +129,13 @@ class SpecFileReader():
         retlist.sort()
         return retlist
 
+    def checkIntegrity(self, firstline):
+        words = firstline.rstrip('\n')
+        splitWords = words.split(' ')
+        keyword = splitWords[0]
+        if keyword != "#S":
+            raise psioException.PSIOSPECFileException()
+
 
 class rawScan():
     '''Placeholder object for disassembling the spec file'''
@@ -188,13 +199,10 @@ class rawScan():
                     if w != '':
                         rawValues.append(w)
             elif keyword[0:8] == "#@MCA_NB":
-                if( splitWords[1] != "1"):
+                if(splitWords[1] != "1"):
                     print("In reading MCA data more than one detector is present.")
             elif keyword[0:7] == "#@DET_0":
                 sd.setMCAName(splitWords[1])
-            #~ elif keyword[0:2] == "#@":
-                #~ print("Illegal start characters: #@. Skip for now until issue is resolved.")
-                #~ pass
             elif keyword[0:2] == "@A":
                 sd.addMCA(np.asarray(splitWords[1:-1], dtype=float))
 

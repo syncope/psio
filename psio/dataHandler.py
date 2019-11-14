@@ -59,7 +59,7 @@ class DataHandler():
         except IOError:
             print("Error opening the file, bailing out.")
         except TypeError:
-            print ("Wrong type for creating a reader, will not work.")
+            print("Wrong type for creating a reader, will not work.")
         return
 
     def __next__(self):

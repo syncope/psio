@@ -129,7 +129,7 @@ class AsciiFileScanData():
         return (self._startline and self._labels and self._noc)
 
     def info(self):
-        print ("[AsciiFileScanData] Values are: ")
+        print("[AsciiFileScanData] Values are: ")
         print(self._startline)
         print(self._number)
         print(self._userdata)
