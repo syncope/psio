@@ -1,3 +1,10 @@
+psio (0.2.8-1+deb9u5~fsec) stretch; urgency=low
+
+  * More minor bug fixes in ASCII file readers, plus introduction of
+    PSIOException for cleaner handling or errors.
+
+ -- Christoph Roseamnn <christoph.rosemann@desy.de>  Thu, 14 Nov 2019 16:48:00 +0100
+
 psio (0.2.7-1+deb9u5~fsec) stretch; urgency=low
 
   * Bug fixes and completetion parts for FIO file reader.
