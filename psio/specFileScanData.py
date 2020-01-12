@@ -83,16 +83,16 @@ class SpecFileScanData():
         scantype = self.getScanType()
         if(scantype == "ascan" or scantype == "dscan"):
             motor = self._startline[2]
-            motorrange = (float(self._startline[3]), float(self._startline[4]))
+            motorrange = abs(float(self._startline[4]) - float(self._startline[3]))
             return {motor : motorrange}
         elif(scantype == "d2scan"):
             motor1 = self._startline[2]
-            motor1range = (float(self._startline[3]), float(self._startline[4]))
+            motor1range = abs(float(self._startline[4]) - float(self._startline[3]))
             motor2 = self._startline[5]
-            motor2range = (float(self._startline[6]), float(self._startline[7]))
+            motor2range = abs(float(self._startline[7]) - float(self._startline[6]))
             return {motor1 : motor1range, motor2 : motor2range}
         elif (scantype == "hscan"):
-            return {self._startline[1]: ( float(self._startline[2]), float(self._startline[3]))} 
+            return {self._startline[1]: abs(float(self._startline[3]) - float(self._startline[2]))} 
 
     def getMCA(self):
         return self._mca
