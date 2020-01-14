@@ -83,6 +83,26 @@ class AsciiFileScanData():
         elif (scantype == "hscan"):
             return "e6cctrl_h"
 
+    def getRanges(self):
+        # helper function for identifying different range settings
+        # example line:
+        # d2scan del -0.4 0.4 th -0.2 0.2 30 2.0
+        scantype = self.getScanType()
+        if(scantype == "ascan" or scantype == "dscan"):
+            motor = self._scancommand.split(' ')[1]
+            motorrange = abs(float(self._scancommand.split(' ')[3]) - float(self._scancommand.split(' ')[2]))
+            return {motor : motorrange}
+        elif(scantype == "d2scan"):
+            motor1 = self._scancommand.split(' ')[1]
+            motor1range = abs(float(self._scancommand.split(' ')[3]) - float(self._scancommand.split(' ')[2]))
+            motor2 = self._scancommand.split(' ')[4]
+            motor2range = abs(float(self._scancommand.split(' ')[6]) - float(self._scancommand.split(' ')[5]))
+            return {motor1 : motor1range, motor2 : motor2range}
+        elif (scantype == "hscan"):
+            motor = self._scancommand.split(' ')[1]
+            motorrange = abs(float(self._scancommand.split(' ')[3]) - float(self._scancommand.split(' ')[2]))
+            return {motor : motorrange}
+
     def getMCA(self):
         return self._mca
 

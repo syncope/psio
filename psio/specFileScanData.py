@@ -19,7 +19,7 @@
 
 class SpecFileScanData():
     '''This is the atomic data exchange object. It consists of all
-       information that is nneded for a scan.'''
+       information that is needed for a scan.'''
 
     def __init__(self):
         self._startline = ''
