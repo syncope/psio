@@ -18,10 +18,10 @@ try:
 except ImportError("numpy is not installed. The package will not work without it."):
     pass
 
-try:
-    import pyqtgraph
-except ImportError("pyqtgraph is not installed. No display will be available."):
-    pass
+#~ try:
+    #~ import pyqtgraph
+#~ except ImportError("pyqtgraph is not installed. No display will be available."):
+    #~ pass
 
 from .dataHandler import DataHandler
 from .hdf5Output import HDF5Output

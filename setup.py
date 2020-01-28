@@ -18,6 +18,8 @@ setup(
     description='Library to facilitate access for photon science data in different formats; including a viewer.',
     long_description=long_description,
 
+    test_suite="tests",
+
     url='https://github.com/syncope/psio',
 
     author='Ch.Rosemann',
