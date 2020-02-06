@@ -42,7 +42,7 @@ Files to be read can be supplied either as a list or a string:
     DataHandler TiffReader()
     filenames = ['001.tif', '002.tif', '003.tif']
     
-    images = TiffReader.create_reader(filenames)
+    images = TiffReader(filenames)
 
 The images are then an iterator over the supplied files and the respective images in the files.
 One can directly iterate over the images, where the individual elements are numpy arrays:
@@ -68,7 +68,7 @@ Due to the different structure, for hdf5/NeXus data a path must be given:
     
     path = "/entry/instrument/pilatus/data"
 
-    data = NexusReader.create_reader(filenames, path)
+    data = NexusReader(filenames, path)
  
     for image in data:
         calculateFunction(image)
@@ -82,7 +82,7 @@ In addition to this, random access of individual images/data elements in a hdf5/
     
     path = "/entry/instrument/pilatus/data"
 
-    data = NexusReader.create_reader(filenames, path)
+    data = NexusReader(filenames, path)
     
     imageA = data[23]
 

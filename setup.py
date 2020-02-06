@@ -52,5 +52,6 @@ setup(
         'build_sphinx': {
             'project': ('setup.py', name),
             'version': ('setup.py', version),
-            'release': ('setup.py', release)}},
+            'release': ('setup.py', release),
+            'source_dir': ('setup.py', 'doc')}},
 )
