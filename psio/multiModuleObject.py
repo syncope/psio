@@ -20,24 +20,22 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA  02110-1301, USA.
 
+import numpy as np
 
 
-class NeXusBaseObject():
 
-    def __init__(self):
-        self._unit = ''
-        self._name = ''
-        self._value = ''
-        self._path = ''
+class MultiModuleObject():
 
-    def unit(self):
-        return self._unit
+    def __init__(self, module_id=None):
+        self._module_id = module_id
+        self._error_code = None
+        self._sequence_number = None
 
-    def name(self):
-        return self._name
+    def error_code(self):
+        return self._error_code
 
-    def value(self):
-        return self._value
+    def module_id(self):
+        return self._module_id
 
-    def path(self):
-        return self._path
+    def sequence_number(self):
+        return self._sequence_number
