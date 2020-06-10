@@ -37,3 +37,8 @@ class PSIOSPECFileException(PSIOException):
 class PSIOFIOFileException(PSIOException):
     '''FIO file doesn't match the specification.'''
     pass
+
+
+class PSIOUnknownScanTypeException(PSIOException):
+    '''The given scan type is unknown.'''
+    pass
