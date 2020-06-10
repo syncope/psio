@@ -1,3 +1,9 @@
+psio (0.2.9-1+deb9u5~fsec) stretch; urgency=low
+
+  * Add new access function to ASCII file data, the range.
+
+ -- Christoph Roseamnn <christoph.rosemann@desy.de>  Wed, 15 Jan 2020 09:09:00 +0100
+
 psio (0.2.8-1+deb9u5~fsec) stretch; urgency=low
 
   * More minor bug fixes in ASCII file readers, plus introduction of
