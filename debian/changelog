@@ -1,3 +1,9 @@
+psio (0.2.12-1+deb9u5~fsec) stretch; urgency=low
+
+  * Fix install error from dpkg, which seems to have no side effects. 
+
+ -- Christoph Roseamnn <christoph.rosemann@desy.de>  Thu, 11 Jun 2020 01:31:00 +0200
+
 psio (0.2.11-1+deb9u5~fsec) stretch; urgency=low
 
   * Fix 'lscan' scantype data description; miscounted the arguments
