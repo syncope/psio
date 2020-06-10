@@ -9,7 +9,7 @@ with open(path.join('.', 'README.rst'), encoding='utf-8') as f:
 
 name = 'psio'
 version = '0.2'
-release = '0.2.9'
+release = '0.2.10'
 
 setup(
     name=name,
