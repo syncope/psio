@@ -72,8 +72,10 @@ class SpecFileScanData():
     def getMotorName(self):
         # highly specific to DESY/PETRA III type of spec data
         scantype = self.getScanType()
-        if(scantype == "ascan" or scantype == "dscan" or scantype == "lscan"):
+        if(scantype == "ascan" or scantype == "dscan"):
             return self.getStartIdentifier(2)
+        elif(scantype == "lscan"):
+            return "l_position"
         elif(scantype == "d2scan"):
             return self.getStartIdentifier(2)
         elif (scantype == "hscan"):
@@ -85,9 +87,13 @@ class SpecFileScanData():
     def getRanges(self):
         # helper function for identifying different range settings
         scantype = self.getScanType()
-        if(scantype == "ascan" or scantype == "dscan" or scantype == "lscan"):
+        if(scantype == "ascan" or scantype == "dscan"):
             motor = self._startline[2]
             motorrange = abs(float(self._startline[4]) - float(self._startline[3]))
+            return {motor : motorrange}
+        elif(scantype == "lscan"):
+            motor = "l_position"
+            motorrange = abs(float(self._startline[3]) - float(self._startline[2]))
             return {motor : motorrange}
         elif(scantype == "d2scan"):
             motor1 = self._startline[2]
