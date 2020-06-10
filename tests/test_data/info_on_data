@@ -1,0 +1,36 @@
+Sample data by Andre Rothkirch, DESY
+
+folder hamamatsu_c4880_maxim
+
+  raw data taken at G3 "MaXim", Detector: (modified) Hamamatsu 4880 CCD
+
+  + im_cont2_038.tif: data obtained for residual stress study
+    (publication:Rothkirch-08)
+@inproceedings{Rothkirch-08,
+  author =     "A. Rothkirch and S. Lenser",   
+  title =      "Imaging diffraction using {M}axim at {G3}/{H}asylab -- spatial
+                resolved strain measurements on linear friction welded dissimilar
+                materials ({AA7020-T6/Ti6AlV})",
+ crossref =     "MECASENS-IV-08",
+ pages =      "237-242",
+ annote =       "booktitle and year provided by crossref"
+}
+
+  + c_02.tif: imaging diffraction of a 20ct coin at 311 reflex 
+    (by A.R. for devel and other stuff, unpublished)
+
+folder lambda750ksi
+
+  + diffraction image taken with Lambda 750K Silicon detector
+    during P03 beamtime June 2016: LaB6 standard, detector highly tilted
+    (unpublished)
+
+folder pilatus1m
+  + diffraction image taken with Pilatus 1M detector during P03 commissioning
+    Aug 2016: Silverbehenate from Andre (old stuff, thus aging effects(?))
+    (unpublished)
+
+
+### new data: feb 2nd, 2018
+folder spec
+  + data from p09; permission to use still pending

@@ -16,6 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA  02110-1301, USA.
 
+from . import psioException
 
 class SpecFileScanData():
     '''This is the atomic data exchange object. It consists of all
@@ -69,19 +70,22 @@ class SpecFileScanData():
         self.setScanNumber(int(sl[0]))
 
     def getMotorName(self):
-        # highly specific stuff to DESY/PETRA III
+        # highly specific to DESY/PETRA III type of spec data
         scantype = self.getScanType()
-        if(scantype == "ascan" or scantype == "dscan"):
+        if(scantype == "ascan" or scantype == "dscan" or scantype == "lscan"):
             return self.getStartIdentifier(2)
         elif(scantype == "d2scan"):
             return self.getStartIdentifier(2)
         elif (scantype == "hscan"):
             return "e6cctrl_h"
+        else:
+            print("[specFileScanData] scan not recognized, identifier is: " + self.getStartIdentifier(2))
+            raise psioException.PSIOUnknownScanTypeException()
 
     def getRanges(self):
         # helper function for identifying different range settings
         scantype = self.getScanType()
-        if(scantype == "ascan" or scantype == "dscan"):
+        if(scantype == "ascan" or scantype == "dscan" or scantype == "lscan"):
             motor = self._startline[2]
             motorrange = abs(float(self._startline[4]) - float(self._startline[3]))
             return {motor : motorrange}
@@ -92,7 +96,7 @@ class SpecFileScanData():
             motor2range = abs(float(self._startline[7]) - float(self._startline[6]))
             return {motor1 : motor1range, motor2 : motor2range}
         elif (scantype == "hscan"):
-            return {self._startline[1]: abs(float(self._startline[3]) - float(self._startline[2]))} 
+            return {self._startline[1]: abs(float(self._startline[3]) - float(self._startline[2]))}
 
     def getMCA(self):
         return self._mca
