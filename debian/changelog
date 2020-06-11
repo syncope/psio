@@ -1,3 +1,10 @@
+psio (0.2.14-1+deb9u5~fsec) stretch; urgency=low
+
+  * Introduced more scan types (kscan and hklscan) plus default motor names
+    and range checking. Added exception handling if no known scan type is used.
+
+ -- Christoph Roseamnn <christoph.rosemann@desy.de>  Thu, 11 Jun 2020 23:56:00 +0200
+
 psio (0.2.12-1+deb9u5~fsec) stretch; urgency=low
 
   * Fix install error from dpkg, which seems to have no side effects. 
