@@ -80,6 +80,8 @@ class SpecFileScanData():
             return "k_position"
         elif(scantype == "lscan"):
             return "l_position"
+        elif(scantype == "hklscan"):
+            return "h_position"
         elif(scantype == "d2scan"):
             return self.getStartIdentifier(2)
         else:
@@ -88,6 +90,7 @@ class SpecFileScanData():
 
     def getRanges(self):
         # helper function for identifying different range settings
+        # again very specific for PETRA III
         scantype = self.getScanType()
         if(scantype == "ascan" or scantype == "dscan"):
             motor = self._startline[2]
@@ -105,6 +108,14 @@ class SpecFileScanData():
             motor = "l_position"
             motorrange = abs(float(self._startline[3]) - float(self._startline[2]))
             return {motor : motorrange}
+        elif(scantype == "hklscan"):
+            motor1 = "e6cctrl_h"
+            motor2 = "e6cctrl_k"
+            motor3 = "e6cctrl_l"
+            motor1range = abs(float(self._startline[3]) - float(self._startline[2]))
+            motor2range = abs(float(self._startline[5]) - float(self._startline[4]))
+            motor3range = abs(float(self._startline[7]) - float(self._startline[6]))
+            return {motor1 : motor1range, motor2 : motor2range, motor3 : motor3range}
         elif(scantype == "d2scan"):
             motor1 = self._startline[2]
             motor1range = abs(float(self._startline[4]) - float(self._startline[3]))
