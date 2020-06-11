@@ -23,11 +23,11 @@ import os
 from psio import specInputHandler
 
 
-class TestspecInputHandler2(unittest.TestCase):
+class TestspecInputHandler3(unittest.TestCase):
 
     def setUp(self):
         dir_path = os.path.dirname(os.path.realpath(__file__)) + "/"
-        f = "test_data/spec/cro05_2.spc"
+        f = "test_data/spec/GdPdSiGex03.spc"
         img = os.path.join(dir_path, f)
 
         self.dataHandle = specInputHandler.SpecInputHandler()
@@ -37,14 +37,26 @@ class TestspecInputHandler2(unittest.TestCase):
         self.assertIsNotNone(self.dataHandle)
 
     def test_getAll(self):
-        self.assertEqual(len(self.dhSPC.getAll()), 2724)
+        self.assertEqual(len(self.dhSPC.getAll()), 680)
 
-    def test_getEntry(self):
-        scan = self.dhSPC.getEntry(383)
+    def test_getEntryhscan(self):
+        scan = self.dhSPC.getEntry(73)
+        self.assertEqual(scan.getMotorName(), "h_position")
+
+    def test_getEntrykscan(self):
+        scan = self.dhSPC.getEntry(233)
+        self.assertEqual(scan.getMotorName(), "k_position")
+
+    def test_getEntrylscan(self):
+        scan = self.dhSPC.getEntry(379)
+        self.assertEqual(scan.getMotorName(), "l_position")
+
+    def test_getEntryhklscan(self):
+        scan = self.dhSPC.getEntry(235)
         self.assertEqual(scan.getMotorName(), "h_position")
 
     def test_getNofEntries(self):
-        self.assertEqual(self.dhSPC.getTotalNumberOfEntries(), 2724)
+        self.assertEqual(self.dhSPC.getTotalNumberOfEntries(), 680)
 
 if __name__ == '__main__':
     unittest.main()
