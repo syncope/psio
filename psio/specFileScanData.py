@@ -74,27 +74,48 @@ class SpecFileScanData():
         scantype = self.getScanType()
         if(scantype == "ascan" or scantype == "dscan"):
             return self.getStartIdentifier(2)
+        elif (scantype == "hscan"):
+            return "h_position"
+        elif (scantype == "kscan"):
+            return "k_position"
         elif(scantype == "lscan"):
             return "l_position"
+        elif(scantype == "hklscan"):
+            return "h_position"
         elif(scantype == "d2scan"):
             return self.getStartIdentifier(2)
-        elif (scantype == "hscan"):
-            return "e6cctrl_h"
         else:
             print("[specFileScanData] scan not recognized, identifier is: " + self.getStartIdentifier(2))
             raise psioException.PSIOUnknownScanTypeException()
 
     def getRanges(self):
         # helper function for identifying different range settings
+        # again very specific for PETRA III
         scantype = self.getScanType()
         if(scantype == "ascan" or scantype == "dscan"):
             motor = self._startline[2]
             motorrange = abs(float(self._startline[4]) - float(self._startline[3]))
             return {motor : motorrange}
+        elif(scantype == "hscan"):
+            motor = "h_position"
+            motorrange = abs(float(self._startline[3]) - float(self._startline[2]))
+            return {motor : motorrange}
+        elif(scantype == "kscan"):
+            motor = "k_position"
+            motorrange = abs(float(self._startline[3]) - float(self._startline[2]))
+            return {motor : motorrange}
         elif(scantype == "lscan"):
             motor = "l_position"
             motorrange = abs(float(self._startline[3]) - float(self._startline[2]))
             return {motor : motorrange}
+        elif(scantype == "hklscan"):
+            motor1 = "e6cctrl_h"
+            motor2 = "e6cctrl_k"
+            motor3 = "e6cctrl_l"
+            motor1range = abs(float(self._startline[3]) - float(self._startline[2]))
+            motor2range = abs(float(self._startline[5]) - float(self._startline[4]))
+            motor3range = abs(float(self._startline[7]) - float(self._startline[6]))
+            return {motor1 : motor1range, motor2 : motor2range, motor3 : motor3range}
         elif(scantype == "d2scan"):
             motor1 = self._startline[2]
             motor1range = abs(float(self._startline[4]) - float(self._startline[3]))
@@ -103,6 +124,8 @@ class SpecFileScanData():
             return {motor1 : motor1range, motor2 : motor2range}
         elif (scantype == "hscan"):
             return {self._startline[1]: abs(float(self._startline[3]) - float(self._startline[2]))}
+        else:
+            raise psioException.PSIOUnknownScanTypeException()
 
     def getMCA(self):
         return self._mca
